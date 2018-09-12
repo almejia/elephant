@@ -56,45 +56,82 @@
 []
 
 [BCs]
-active = 'inlet outlet inlet_v outlet_v inlet_phi outlet_phi'
+active = 'Neumann_inlet_u Neumann_outlet_u Neumann_inlet_v Neumann_outlet_v Neumann_inlet_phi Neumann_outlet_phi'
 
-  [./inlet_u]
+  [./Neumann_inlet_u]
     type = NeumannBC
     variable = u
     boundary = left
-    value = 0.0
+    value = 0
   [../]
-  [./outlet_u]
+  [./Neumann_outlet_u]
     type = NeumannBC
     variable = u
     boundary = right
-    value = 0.0 
+    value = 0
   [../]
 
-  [./inlet_v]
+  [./inlet_u]
+    type = DiffusionBC
+    variable = u
+    boundary = left
+    gradient_coefficient = 8e-9
+  [../]
+  [./outlet_u]
+    type = DiffusionBC
+    variable = u
+    boundary = right
+    gradient_coefficient = 8e-9 
+  [../]
+
+  [./Neumann_inlet_v]
     type = NeumannBC
     variable = v
     boundary = left
     value = 4.2746 # e9 using the larger and negative value for this BC leads to solver failure?
   [../]
-  [./outlet_v]
+  [./Neumann_outlet_v]
     type = NeumannBC
     variable = v
     boundary = right
-    value = 0.0
+    value = 0
+  [../]
+  [./inlet_v]
+    type = DiffusionBC
+    variable = v
+    boundary = left
+    gradient_coefficient = 1e-9 
+  [../]
+  [./outlet_v]
+    type = DiffusionBC
+    variable = v
+    boundary = right
+    gradient_coefficient = 1e-9
   [../]
 
-  [./inlet_phi]
+  [./Neumann_inlet_phi]
     type = NeumannBC
     variable = phi
     boundary = left
-    value = 0.0
+    value = 0
   [../]
-  [./outlet_phi]
+  [./Neumann_outlet_phi]
     type = DirichletBC
     variable = phi
     boundary = right
     value = 0
+  [../]
+  [./inlet_phi]
+    type = DiffusionBC
+    variable = phi
+    boundary = left
+    gradient_coefficient =  3.0875e-10
+  [../]
+  [./outlet_phi]
+    type = DiffusionBC
+    variable = phi
+    boundary = right
+    gradient_coefficient =  3.0875e-10
   [../]
 
 []

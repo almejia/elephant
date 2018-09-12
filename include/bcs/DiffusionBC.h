@@ -45,7 +45,7 @@ protected:
   virtual Real computeQpJacobian() override;
 
   // Gradient coefficient term
-  const MaterialProperty<Real> & _diffusion_coefficient;
+  Real _diffusion_coefficient;
 };
 
 #endif // DIFFUSIONBC_H

@@ -75,9 +75,9 @@ Dopant::Dopant(const InputParameters & parameters)
 Real
 Dopant::computeQpResidual()
 {
-  return -_cd * _grad_u[_qp] * _grad_test[_i][_qp] +
-         ((_ny * _Z * _F * _phi_var[_qp]) - (_nyv * _fyv * _vac_var[_qp]) -
-          2 * _nyy * _fy * _u[_qp] - _R * _T * _ny * log(_u[_qp] / (1 - _u[_qp])) + _lambd) *
+  return _cd * _grad_u[_qp] * _grad_test[_i][_qp] +
+         ((-_ny * _Z * _F * _phi_var[_qp]) + (_nyv * _fyv * _vac_var[_qp]) +
+          2 * _nyy * _fy * _u[_qp] + _R * _T * _ny * log(_u[_qp] / (1 - _u[_qp])) + _lambd) *
              _test[_i][_qp];
 }
 
@@ -85,8 +85,8 @@ Dopant::computeQpResidual()
 Real
 Dopant::computeQpJacobian()
 {
-  return -_cd * _grad_phi[_j][_qp] * _grad_test[_i][_qp] -
-         2 * _nyy * _fy * _test[_i][_qp] * _phi[_j][_qp] -
+  return +_cd * _grad_phi[_j][_qp] * _grad_test[_i][_qp] +
+         2 * _nyy * _fy * _test[_i][_qp] * _phi[_j][_qp] +
          _R * _T * _ny * (1 / (_u[_qp] * (1 - _u[_qp]))) * _test[_i][_qp] * _phi[_j][_qp];
 }
 /**/
@@ -96,12 +96,12 @@ Dopant::computeQpOffDiagJacobian(unsigned int jvar)
 {
   if (jvar == _v_var)
   {
-    return -_nyv * _fyv * _test[_i][_qp] * _phi[_j][_qp];
+    return _nyv * _fyv * _test[_i][_qp] * _phi[_j][_qp];
   }
 
   if (jvar == _p_var)
   {
-    return _ny * _Z * _F * _test[_i][_qp] * _phi[_j][_qp];
+    return -_ny * _Z * _F * _test[_i][_qp] * _phi[_j][_qp];
   }
 
   return 0.0;

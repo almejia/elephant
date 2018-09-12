@@ -74,9 +74,9 @@ Vacancy::Vacancy(const InputParameters & parameters)
 Real
 Vacancy::computeQpResidual()
 {
-  return -_cv * _grad_u[_qp] * _grad_test[_i][_qp] +
-         ((-_nv * 2 * _F * _phi_var[_qp]) - (_nyv * _fyv * _dop_var[_qp]) -
-          2 * _nvv * _fv * _u[_qp] - _R * _T * _nv * log(_u[_qp] / (1 - _u[_qp])) + _lambv) *
+  return _cv * _grad_u[_qp] * _grad_test[_i][_qp] +
+         ((_nv * 2 * _F * _phi_var[_qp]) + (_nyv * _fyv * _dop_var[_qp]) +
+          2 * _nvv * _fv * _u[_qp] + _R * _T * _nv * log(_u[_qp] / (1 - _u[_qp])) + _lambv) *
              _test[_i][_qp];
 }
 
@@ -84,8 +84,8 @@ Vacancy::computeQpResidual()
 Real
 Vacancy::computeQpJacobian()
 {
-  return -_cv * _grad_phi[_j][_qp] * _grad_test[_i][_qp] -
-         2 * _nvv * _fv * _phi[_j][_qp] * _test[_i][_qp] -
+  return +_cv * _grad_phi[_j][_qp] * _grad_test[_i][_qp] +
+         2 * _nvv * _fv * _phi[_j][_qp] * _test[_i][_qp] +
          _R * _T * _nv * (1 / (_u[_qp] * (1 - _u[_qp]))) * _test[_i][_qp] * _phi[_j][_qp];
 }
 /**/
@@ -95,12 +95,12 @@ Vacancy::computeQpOffDiagJacobian(unsigned int jvar)
 {
   if (jvar == _d_var)
   {
-    return -_nyv * _fyv * _test[_i][_qp] * _phi[_j][_qp];
+    return _nyv * _fyv * _test[_i][_qp] * _phi[_j][_qp];
   }
 
   if (jvar == _p_var)
   {
-    return -_nv * 2 * _F * _test[_i][_qp] * _phi[_j][_qp];
+    return _nv * 2 * _F * _test[_i][_qp] * _phi[_j][_qp];
   }
 
   return 0.0;
