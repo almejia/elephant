@@ -60,7 +60,7 @@ EDiffusion::computeQpResidual()
   //  + (_F * ( 2 * _nv * _vac_var[_qp] - _ny * _Z *_dop_var[_qp] ) ) * _test[_i][_qp]; std::cout <<
   //  "\nphi: " << _u[_qp]; //(_eps0 * _epsr) * _grad_u[_qp] * _grad_test[_i][_qp] + (_F * ( 2 * _nv
   //  * _vac_var[_qp] - _ny * _Z *_dop_var[_qp] ) ) * _test[_i][_qp];
-  return (_eps0 * _epsr) * _grad_u[_qp] * _grad_test[_i][_qp] +
+  return -(_eps0 * _epsr) * _grad_u[_qp] * _grad_test[_i][_qp] +
          (_F * (2 * _nv * _vac_var[_qp] - _ny * _Z * _dop_var[_qp])) * _test[_i][_qp];
 }
 
@@ -68,7 +68,7 @@ Real
 EDiffusion::computeQpJacobian()
 {
   //  std::cout << "Jacobian: " << _grad_phi[_j][_qp] << " * " << _grad_test[_i][_qp] << "\n";
-  return (_eps0 * _epsr) * _grad_phi[_j][_qp] * _grad_test[_i][_qp];
+  return -(_eps0 * _epsr) * _grad_phi[_j][_qp] * _grad_test[_i][_qp];
 }
 
 Real
