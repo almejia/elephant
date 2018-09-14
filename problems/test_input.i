@@ -7,7 +7,7 @@
   ny = 1
   xmax = 5e-7 # Half grain size [m] = 500 [nm]
   ymax = 5e-8 # 2D y-size for viewing mesh refinement
-  bias_x = 1 # bias 0.5 - 2.0 (left - right element-size refinement)
+  bias_x = 1.05 # bias 0.5 - 2.0 (left - right element-size refinement)
 []
 
 [Variables]
@@ -136,6 +136,25 @@ active = 'Neumann_inlet_u Neumann_outlet_u Neumann_inlet_v Neumann_outlet_v Neum
 
 []
 
+[Postprocessors]
+  [./average_concentration]
+    type = ElementAverageValue
+    variable = u
+  [../]
+[]
+
+[VectorPostprocessors]
+  [./line]
+    type = LineValueSampler
+    start_point = '0 0 0'
+    end_point = '5e-9 0 0'
+    num_points = 125
+    variable = 'u v phi'
+    sort_by = 'id'
+  [../]
+[]
+
+
 [Executioner]
   type = Steady
 
@@ -187,10 +206,21 @@ active = 'Neumann_inlet_u Neumann_outlet_u Neumann_inlet_v Neumann_outlet_v Neum
 
 [Outputs]
 #  file_base = out_test
-  console = true
-  exodus = true
+#  console = true
+#  exodus = true
 #  csv = true
 #  [./outtest]
 #    type = Exodus
 #  [../]
+
+  execute_on = 'nonlinear'
+#  [./csv]
+#    type = csv
+#    execute_on = 'initial nonlinear final'
+#  [../]
+  [./exodus]
+    type = Exodus
+    execute_on = 'initial nonlinear final'
+  [../]
+
 []
