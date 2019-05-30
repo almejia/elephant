@@ -53,3 +53,4 @@ include            $(FRAMEWORK_DIR)/app.mk
 
 ###############################################################################
 # Additional special case targets should be added here
+app_INCLUDES += -I/home/alejandro/Documents/IsoFit/src

@@ -30,8 +30,14 @@ protected:
   const VariableValue & _vac_var;
   const VariableValue & _phi_var;
 
+  const PostprocessorValue & _pps_value;
+
+  //  const VariableValue & _l_d;
+
   unsigned int _v_var;
   unsigned int _p_var;
+
+  //  unsigned int _ld;
 
   Real _R; /** Universal constant [J/mol*K] */
   Real _T; /** Temperature [K] */

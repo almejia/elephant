@@ -30,6 +30,9 @@ protected:
   const VariableValue & _dop_var;
   const VariableValue & _phi_var;
 
+  const PostprocessorValue & _pps_value;
+
+
   unsigned int _d_var;
   unsigned int _p_var;
 
