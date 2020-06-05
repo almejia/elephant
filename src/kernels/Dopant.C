@@ -13,7 +13,7 @@
 //#include "func_bssanova_2.hpp"
 //#include 
 //#include <boost/numeric/ublas/io.hpp>
-#include "func_bssanova_2.hpp"
+//#include "func_bssanova_2.hpp"
 
 
 registerMooseObject("MooseApp", Dopant);
@@ -136,7 +136,7 @@ Dopant::computeQpResidual()
          ((-_ny * _Z * _F * _phi_var[_qp]) + (_nyv * _fyv * _vac_var[_qp]) +
           2 * _nyy * _fy * _u[_qp] + _R * _T * _ny * log(_u[_qp] / (1 - _u[_qp])) + _lambd) *
 	  _test[_i][_qp]; /**/
-  func_bssanova DiskFunc1;
+  /*  func_bssanova DiskFunc1;
   std::string DiskConfile = "config/config_Disc.txt";
   boost::numeric::ublas::vector<double> Betas1, Betas;
   boost::numeric::ublas::vector<double> Par1; 
@@ -145,10 +145,10 @@ Dopant::computeQpResidual()
   double Byp;
 
   Betas.resize(5);
-  Betas(0) = /*1;/*/0.8422e10; // By1
-  Betas(1) = /*1;/*/2.9252e10; // By2
-  Betas(2) = /*1;/*/-2.0418e9; // Bvy
-  Betas(3) = /*1;/*/1.1804e-9; // Bvp
+  Betas(0) = /*1;//*0.8422e10; // By1
+  Betas(1) = /*1;/*2.9252e10; // By2
+  Betas(2) = /*1;/*-2.0418e9; // Bvy
+  Betas(3) = /*1;/*1.1804e-9; // Bvp
   Betas(4) = 0;         // Byyp
 
   bool diskconfsuccess = false;
@@ -164,7 +164,7 @@ Dopant::computeQpResidual()
     Betas1[i] = Betas[i];
   } 
 
-  Byp = /*0;/*/1.1804e-9;
+  Byp = /*0;/*1.1804e-9;
 
   Par1.resize(2);
   Par1[0] = _u[_qp];
@@ -174,14 +174,14 @@ Dopant::computeQpResidual()
 
   std::cout << "\nParam (u v): " << Par1[0] << " " << Par1[1] << "\t Betas: " << Betas1(0) << " " << Betas(1) << "\t Disc: " << DiskRes << "\t Res:" << ((-_ny * _Z * _F * _phi_var[_qp]) + _R * _T * _ny * log(_u[_qp] / (1 - _u[_qp])) + _lambd + _pps_value + DiskRes) * _test[_i][_qp] << std::endl;
   //*
-  return ((-_ny * _Z * _F * _phi_var[_qp]) + _R * _T * _ny * log(_u[_qp] / (1 - _u[_qp])) + _lambd + _pps_value + DiskRes) * _test[_i][_qp] /*+ _test[_i][_qp] * Byp * _grad_u[_qp]*/ ; //*/
+  return ((-_ny * _Z * _F * _phi_var[_qp]) + _R * _T * _ny * log(_u[_qp] / (1 - _u[_qp])) + _lambd + _pps_value + DiskRes) * _test[_i][_qp] /*+ _test[_i][_qp] * Byp * _grad_u[_qp]* ; //*/
 
   /*
   return _cd * _grad_u[_qp] * _grad_test[_i][_qp] +
          ((-_ny * _Z * _F * _phi_var[_qp]) + (_nyv * _fyv * _vac_var[_qp]) +
           2 * _nyy * _fy * _u[_qp] + _R * _T * _ny * log(_u[_qp] / (1 - _u[_qp])) + _lambd + _pps_value) *
              _test[_i][_qp]; //*/ /*_l_d[_qp]/**/
-}
+  }
 
 //*
 Real
@@ -225,7 +225,7 @@ Dopant::computeQpJacobian()
   std::cout << std::endl << diskDer << std::endl;
 
   */
-
+  /*
   func_bssanova DiskFunc1;
   std::string DiskConfile = "config/config_Disc2.txt";
   boost::numeric::ublas::vector<double> Betas1, Betas;
@@ -235,13 +235,13 @@ Dopant::computeQpJacobian()
   double Byp;
 
   Betas.resize(5);
-  Betas(0) = /*1;/*/0.8422e10; // By1
-  Betas(1) = /*1;/*/2.9252e10; // By2
-  Betas(2) = /*1;/*/-2.0418e9; // Bvy
-  Betas(3) = /*1;/*/1.1804e-9; // Bvp
+  Betas(0) = /*1;/*0.8422e10; // By1
+  Betas(1) = /*1;/*2.9252e10; // By2
+  Betas(2) = /*1;/*-2.0418e9; // Bvy
+  Betas(3) = /*1;/*1.1804e-9; // Bvp
   Betas(4) = 0;         // Byyp
 
-  bool diskconfsuccess = false;
+  /*  bool diskconfsuccess = false;
   diskconfsuccess = DiskFunc1.SplineConfig(DiskConfile);
   if (!diskconfsuccess) {
     std::cout << "There is an issue with the Discrepancy Configuration File. Press Enter to exit." << std::endl;
@@ -254,7 +254,7 @@ Dopant::computeQpJacobian()
     Betas1[i] = Betas[i];
   } 
 
-  Byp = /*0;/*/1.1804e-9;
+  Byp = /*0;/*1.1804e-9;
 
   Par1.resize(2);
   Par1[0] = _u[_qp];
@@ -263,10 +263,10 @@ Dopant::computeQpJacobian()
   DiskFunc1.Spline2ndDeriv(0, Par1, Betas1, DiskRes);
 
   //*
-  return /*Byp * _grad_phi[_j][_qp] * _test[_i][_qp] +*/ ( _R * _T * _ny * (1 / (_u[_qp] * (1 - _u[_qp]) ) ) + DiskRes) * _test[_i][_qp] * _phi[_j][_qp]; /**/
+  return /*Byp * _grad_phi[_j][_qp] * _test[_i][_qp] +* ( _R * _T * _ny * (1 / (_u[_qp] * (1 - _u[_qp]) ) ) + DiskRes) * _test[_i][_qp] * _phi[_j][_qp]; /**/
 
 
-  /*
+  //*
   return +_cd * _grad_phi[_j][_qp] * _grad_test[_i][_qp] +
          2 * _nyy * _fy * _test[_i][_qp] * _phi[_j][_qp] +
          _R * _T * _ny * (1 / (_u[_qp] * (1 - _u[_qp]))) * _test[_i][_qp] * _phi[_j][_qp]; /**/
@@ -276,7 +276,7 @@ Dopant::computeQpJacobian()
 Real
 Dopant::computeQpOffDiagJacobian(unsigned int jvar)
 {
-
+  /*
   func_bssanova DiskFunc1;
   std::string DiskConfile = "config/config_Disc3.txt";
   boost::numeric::ublas::vector<double> Betas1, Betas;
@@ -286,7 +286,7 @@ Dopant::computeQpOffDiagJacobian(unsigned int jvar)
   double Byp;
 
   Betas.resize(1);
-  Betas(0) = /*1;/*/-2.0418e9; // Bvy
+  Betas(0) = /*1;/*-2.0418e9; // Bvy
 
   bool diskconfsuccess = false;
   diskconfsuccess = DiskFunc1.SplineConfig(DiskConfile);
@@ -301,19 +301,19 @@ Dopant::computeQpOffDiagJacobian(unsigned int jvar)
     Betas1[i] = Betas[i];
   } 
 
-  Byp = /*0;/*/1.1804e-9;
+  Byp = /*0;/*1.1804e-9;
 
   Par1.resize(2);
   Par1[0] = _u[_qp];
   Par1[1] = _vac_var[_qp];
 
   DiskFunc1.SplineDeriv3(0, Par1, Betas1, DiskRes);
-
+  */
   if (jvar == _v_var)
   {
-    return DiskRes *_test[_i][_qp] * _phi[_j][_qp];
+    //return DiskRes *_test[_i][_qp] * _phi[_j][_qp];
 
-    // return _nyv * _fyv * _test[_i][_qp] * _phi[_j][_qp];
+     return _nyv * _fyv * _test[_i][_qp] * _phi[_j][_qp];
   }
 
   if (jvar == _p_var)
