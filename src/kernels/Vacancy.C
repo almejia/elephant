@@ -12,6 +12,8 @@
 //#include <boost/numeric/ublas/vector.hpp>
 //#include "funeval_base.hpp"
 //#include "func_bssanova_2.hpp"
+#include "func_bssanova_2.hpp"
+
 
 registerMooseObject("MooseApp", Vacancy);
 
@@ -25,6 +27,9 @@ validParams<Vacancy>()
 
   params.addRequiredCoupledVar("dop", "Coupled variable [dopant concentration].");
   params.addRequiredCoupledVar("phi", "Coupled variable Phi (electrostatic potential).");
+
+  params.addParam<PostprocessorName>("pps_name", 0.1, "Postprocessor name");
+
 
   params.addParam<Real>("R", 8.314, "Universal constant (R = 8.314)");
   params.addParam<Real>("T", 1673, "Temperature (T).");
@@ -55,6 +60,9 @@ Vacancy::Vacancy(const InputParameters & parameters)
 
     _dop_var(coupledValue("dop")),
     _phi_var(coupledValue("phi")),
+
+    _pps_value(getPostprocessorValue("pps_name")),
+
 
     _d_var(coupled("dop")),
     _p_var(coupled("phi")),
@@ -165,22 +173,148 @@ Vacancy::computeQpResidual()
 
 } //*/
 
+  func_bssanova DiskFunc1;
+  std::string DiskConfile = "config/config_Disc.txt";
+  boost::numeric::ublas::vector<double> Betas1, Betas;
+  boost::numeric::ublas::vector<double> Par1; 
+  double DiskRes;
+  double DiskRes2;
+  double Bvp;
+
+  Betas.resize(5);
+  Betas(0) = /*1;/*/1.9002e10; // Bv1
+  Betas(1) = /*1;/*/0.6241e10; // Bv2
+  Betas(2) = /*1;/*/-2.0418e9; // Bvy
+  Betas(3) = /*1;/*/6.3635e-9; // Bvp
+  Betas(4) = 0;         // Bvvp
+
+  bool diskconfsuccess = false;
+  diskconfsuccess = DiskFunc1.SplineConfig(DiskConfile);
+  if (!diskconfsuccess) {
+    std::cout << "There is an issue with the Discrepancy Configuration File. Press Enter to exit." << std::endl;
+    return 0;
+  }
+
+  Betas1.resize(DiskFunc1.betsize());
+
+  for (int i = 0; i < Betas1.size(); i++) {
+    Betas1[i] = Betas[i];
+  } 
+
+  Bvp = /*0;/*/6.3635e-9;
+
+  Par1.resize(2);
+  Par1[0] = _u[_qp];
+  Par1[1] = _dop_var[_qp];
+
+  DiskFunc1.SplineDeriv2(0, Par1, Betas1, DiskRes);
+
+  std::cout << "\nParam (v u): " << Par1[0] << " " << Par1[1] << "\t Betas: " << Betas1(0) << " " << Betas(1) << "\t Disc: " << DiskRes << "\t Res:" << ((_nv * 2 * _F * _phi_var[_qp]) + _R * _T * _nv * log(_u[_qp] / (1 - _u[_qp])) + _lambv + _pps_value + DiskRes) * _test[_i][_qp] << std::endl;
+  //*
+  return ((_nv * 2 * _F * _phi_var[_qp]) + _R * _T * _nv * log(_u[_qp] / (1 - _u[_qp])) + _lambv + _pps_value + DiskRes) * _test[_i][_qp] /*+ _test[_i][_qp] * Byp * _grad_u[_qp]*/ ; //*/
+
+
+  /*
+  return _cv * _grad_u[_qp] * _grad_test[_i][_qp] +
+         ((_nv * 2 * _F * _phi_var[_qp]) + (_nyv * _fyv * _dop_var[_qp]) +
+          2 * _nvv * _fv * _u[_qp] + _R * _T * _nv * log(_u[_qp] / (1 - _u[_qp])) + _lambv) *
+	  _test[_i][_qp];/**/
+}
+
 //*
 Real
 Vacancy::computeQpJacobian()
 {
+
+  func_bssanova DiskFunc1;
+  std::string DiskConfile = "config/config_Disc2.txt";
+  boost::numeric::ublas::vector<double> Betas1, Betas;
+  boost::numeric::ublas::vector<double> Par1; 
+  double DiskRes;
+  double DiskRes2;
+  double Bvp;
+
+  Betas.resize(5);
+  Betas(0) = /*1;/*/1.9002e10; // Bv1
+  Betas(1) = /*1;/*/0.6241e10; // Bv2
+  Betas(2) = /*1;/*/-2.0418e9; // Bvy
+  Betas(3) = /*1;/*/6.3635e-9; // Bvp
+  Betas(4) = 0;         // Bvvp
+
+  bool diskconfsuccess = false;
+  diskconfsuccess = DiskFunc1.SplineConfig(DiskConfile);
+  if (!diskconfsuccess) {
+    std::cout << "There is an issue with the Discrepancy Configuration File. Press Enter to exit." << std::endl;
+    return 0;
+  }
+
+  Betas1.resize(DiskFunc1.betsize());
+
+  for (int i = 0; i < Betas1.size(); i++) {
+    Betas1[i] = Betas[i];
+  } 
+
+  Bvp = /*0;/*/6.3635e-9;
+
+  Par1.resize(2);
+  Par1[0] = _u[_qp];
+  Par1[1] = _dop_var[_qp];
+
+  DiskFunc1.Spline2ndDeriv(0, Par1, Betas1, DiskRes);
+
+  //*
+  return /*Byp * _grad_phi[_j][_qp] * _test[_i][_qp] +*/ ( _R * _T * _nv * (1 / (_u[_qp] * (1 - _u[_qp]) ) ) + DiskRes) * _test[_i][_qp] * _phi[_j][_qp]; /**/
+
+  /*
   return +_cv * _grad_phi[_j][_qp] * _grad_test[_i][_qp] +
          2 * _nvv * _fv * _phi[_j][_qp] * _test[_i][_qp] +
-         _R * _T * _nv * (1 / (_u[_qp] * (1 - _u[_qp]))) * _test[_i][_qp] * _phi[_j][_qp];
+         _R * _T * _nv * (1 / (_u[_qp] * (1 - _u[_qp]))) * _test[_i][_qp] * _phi[_j][_qp]; /**/
 }
 /**/
 
 Real
 Vacancy::computeQpOffDiagJacobian(unsigned int jvar)
 {
+
+  func_bssanova DiskFunc1;
+  std::string DiskConfile = "config/config_Disc3.txt";
+  boost::numeric::ublas::vector<double> Betas1, Betas;
+  boost::numeric::ublas::vector<double> Par1; 
+  double DiskRes;
+  double DiskRes2;
+  double Bvp;
+
+  Betas.resize(1);
+  Betas(0) = /*1;/*/-2.0418e9; // Bvy
+
+  bool diskconfsuccess = false;
+  diskconfsuccess = DiskFunc1.SplineConfig(DiskConfile);
+  if (!diskconfsuccess) {
+    std::cout << "There is an issue with the Discrepancy Configuration File. Press Enter to exit." << std::endl;
+    return 0;
+  }
+
+  Betas1.resize(DiskFunc1.betsize());
+
+  for (int i = 0; i < Betas1.size(); i++) {
+    Betas1[i] = Betas[i];
+  } 
+
+  Bvp = /*0;/*/6.3635e-9;
+
+  Par1.resize(2);
+  Par1[0] = _u[_qp];
+  Par1[1] = _dop_var[_qp];
+
+
+  DiskFunc1.SplineDeriv3(0, Par1, Betas1, DiskRes);
+
+
   if (jvar == _d_var)
   {
-    return _nyv * _fyv * _test[_i][_qp] * _phi[_j][_qp];
+    return DiskRes *_test[_i][_qp] * _phi[_j][_qp];
+
+    // return _nyv * _fyv * _test[_i][_qp] * _phi[_j][_qp];
   }
 
   if (jvar == _p_var)

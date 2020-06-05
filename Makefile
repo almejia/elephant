@@ -55,3 +55,4 @@ include            $(FRAMEWORK_DIR)/app.mk
 # Additional special case targets should be added here
 #ADDITIONAL_LIBS    :=/home/alejandro/esms/IsoFit/src/funeval_base.hpp
 #app_INCLUDES      += -I /home/alejandro/esms/IsoFit/src
+app_INCLUDES += -I/home/alejandro/Documents/IsoFit/src
