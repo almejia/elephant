@@ -29,10 +29,10 @@ ALL_MODULES         := no
 CHEMICAL_REACTIONS  := no
 CONTACT             := no
 FLUID_PROPERTIES    := no
-HEAT_CONDUCTION     := no
+HEAT_CONDUCTION     := yes
 MISC                := no
 NAVIER_STOKES       := no
-PHASE_FIELD         := yes
+PHASE_FIELD         := no
 RDG                 := no
 RICHARDS            := no
 SOLID_MECHANICS     := no
@@ -53,3 +53,5 @@ include            $(FRAMEWORK_DIR)/app.mk
 
 ###############################################################################
 # Additional special case targets should be added here
+#ADDITIONAL_LIBS    :=/home/alejandro/esms/IsoFit/src/funeval_base.hpp
+#app_INCLUDES      += -I /home/alejandro/esms/IsoFit/src

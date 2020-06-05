@@ -7,21 +7,20 @@
 //* Licensed under LGPL 2.1, please see LICENSE for details
 //* https://www.gnu.org/licenses/lgpl-2.1.html
 
-#ifndef DOPANT_H
-#define DOPANT_H
+#ifndef ELECTRON_H
+#define ELECTRON_H
 
 #include "Kernel.h"
-//#include <boost/numeric/ublas/vector.hpp>
 
-class Dopant;
+class Electron;
 
 template <>
 InputParameters validParams<Dopant>();
 
-class Dopant : public Kernel
+class Electron : public Kernel
 {
 public:
-  Dopant(const InputParameters & parameters);
+  Electron(const InputParameters & parameters);
 
 protected:
   virtual Real computeQpResidual() override;
@@ -31,13 +30,17 @@ protected:
   const VariableValue & _vac_var;
   const VariableValue & _phi_var;
 
+  const VariableValue & _mu_var;
+  
   unsigned int _v_var;
   unsigned int _p_var;
 
+  unsigned int _m_var;
+  
   Real _R; /** Universal constant [J/mol*K] */
   Real _T; /** Temperature [K] */
 
-  Real _Z;   /** Dopant chemcial formula index */
+  Real _Dop; /** Dopant fixed concentration */
   Real _ny;  /** Cation site density [mol/m^3] */
   Real _nyy; /** Cation-cation density [mol/m^3] */
   Real _nyv; /** Anion-cation density [mol/m^3] */
@@ -49,4 +52,4 @@ protected:
   Real _lambd; /** Lagrange multiplier */
 };
 
-#endif /* DOPANT_H */
+#endif /* ELECTRON_H */

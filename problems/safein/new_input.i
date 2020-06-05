@@ -3,27 +3,27 @@
 [Mesh]
   type = GeneratedMesh
   dim = 2
-  nx = 20 # Number of elements in X-direction 
+  nx = 50 # Number of elements in X-direction 
   ny = 10
   xmax = 5e-7 # Half grain size [m] = 500 [nm]
   ymax = 5e-8 # 2D y-size for viewing mesh refinement
   bias_x = 1.2 # bias 0.5 - 2.0 (left - right element-size refinement)
-  bias_y = 0.8
+  bias_y = 0.9
 []
 
 [MeshModifiers]
   [./subdomain_id]
     type = AssignElementSubdomainID
-    subdomain_ids = '0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                     0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                     0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                     2 2 2 2 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                     2 2 2 2 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                     1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-                     1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-                     1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-                     1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-                     1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1'
+    subdomain_ids = '0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                     0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                     0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                     2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                     2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+                     1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+                     1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+                     1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+                     1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+                     1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1'
   [../]
   [./side_set]
     type = SideSetsBetweenSubdomains
@@ -62,8 +62,8 @@
     dop = u
     vac = v
   [../]
-  [./dopant_kernel]
-    type = Dopant
+  [./electron_kernel]
+    type = Electron
     variable = u
     vac = v
     phi = phi
@@ -77,6 +77,14 @@
     lambv = 1.393471200379236e9 # fixed Lagrange multiplier value
   [../]
 
+  [./u_dot]
+    type = TimeDerivative
+    variable = u
+  [../]
+  [./v_dot]
+    type = TimeDerivative
+    variable = v
+  [../]
 []
 
 [BCs]
@@ -95,19 +103,6 @@ active = 'Neumann_inlet_u Neumann_outlet_u Neumann_inlet_v Neumann_outlet_v Neum
     value = 0
   [../]
 
-  [./inlet_u]
-    type = DiffusionBC
-    variable = u
-    boundary = left
-    gradient_coefficient = 8e-9
-  [../]
-  [./outlet_u]
-    type = DiffusionBC
-    variable = u
-    boundary = right
-    gradient_coefficient = 8e-9 
-  [../]
-
   [./Neumann_inlet_v]
     type = NeumannBC
     variable = v
@@ -119,18 +114,6 @@ active = 'Neumann_inlet_u Neumann_outlet_u Neumann_inlet_v Neumann_outlet_v Neum
     variable = v
     boundary = right
     value = 0
-  [../]
-  [./inlet_v]
-    type = DiffusionBC
-    variable = v
-    boundary = left
-    gradient_coefficient = 1e-9 
-  [../]
-  [./outlet_v]
-    type = DiffusionBC
-    variable = v
-    boundary = right
-    gradient_coefficient = 1e-9
   [../]
 
   [./Neumann_inlet_phi]
@@ -144,18 +127,6 @@ active = 'Neumann_inlet_u Neumann_outlet_u Neumann_inlet_v Neumann_outlet_v Neum
     variable = phi
     boundary = right
     value = 0
-  [../]
-  [./inlet_phi]
-    type = DiffusionBC
-    variable = phi
-    boundary = left
-    gradient_coefficient =  3.0875e-10
-  [../]
-  [./outlet_phi]
-    type = DiffusionBC
-    variable = phi
-    boundary = right
-    gradient_coefficient =  3.0875e-10
   [../]
 
 []
@@ -180,17 +151,28 @@ active = 'Neumann_inlet_u Neumann_outlet_u Neumann_inlet_v Neumann_outlet_v Neum
 
 
 [Executioner]
-  type = Steady
+  type = Transient
+  solve_type = NEWTON
+  l_max_its = 30
+  l_tol = 1e-6
+  nl_max_its = 50
+  nl_abs_tol = 1e-9
+  end_time = 1800
+  petsc_options_iname = '-pc_type -ksp_gmres_restart -sub_ksp_type -sub_pc_type -pc_asm_overlap'
+  petsc_options_value = 'asm  31  preonly  ilu  1'
+
+  
+#  type = Steady
 
 #  solve_type = NEWTON
-  nl_max_its = 30
-  l_max_its = 100
-  petsc_options_iname = '-pc_type'
-  petsc_options_value = 'lu'
+#  nl_max_its = 30
+#  l_max_its = 100
+#  petsc_options_iname = '-pc_type'
+#  petsc_options_value = 'lu'
 
-  petsc_options = '-ksp_converged_reason -snes_converged_reason'
+#  petsc_options = '-ksp_converged_reason -snes_converged_reason'
 
-  solve_type = PJFNK
+#  solve_type = PJFNK
 #  nl_max_its = 30
 #  l_max_its = 1000
 #  petsc_options_iname = '-pc_type -pc_hypre_type'

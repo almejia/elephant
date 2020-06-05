@@ -3,37 +3,13 @@
 [Mesh]
   type = GeneratedMesh
   dim = 2
-  nx = 20 # Number of elements in X-direction 
-  ny = 10
+  nx = 125 # Number of elements in X-direction 
+  ny = 1
   xmax = 5e-7 # Half grain size [m] = 500 [nm]
   ymax = 5e-8 # 2D y-size for viewing mesh refinement
-  bias_x = 1.2 # bias 0.5 - 2.0 (left - right element-size refinement)
-  bias_y = 0.8
+  bias_x = 1.05 # bias 0.5 - 2.0 (left - right element-size refinement)
 []
 
-[MeshModifiers]
-  [./subdomain_id]
-    type = AssignElementSubdomainID
-    subdomain_ids = '0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                     0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                     0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                     2 2 2 2 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                     2 2 2 2 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
-                     1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-                     1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-                     1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-                     1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-                     1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1'
-  [../]
-  [./side_set]
-    type = SideSetsBetweenSubdomains
-    depends_on = subdomain_id
-    master_block = '0 1 2'
-    paired_block = '2'
-    new_boundary = 'new'
-  [../]
-[]
-  
 [Variables]
   [./u]
     order = FIRST
@@ -182,7 +158,7 @@ active = 'Neumann_inlet_u Neumann_outlet_u Neumann_inlet_v Neumann_outlet_v Neum
 [Executioner]
   type = Steady
 
-#  solve_type = NEWTON
+  solve_type = NEWTON
   nl_max_its = 30
   l_max_its = 100
   petsc_options_iname = '-pc_type'
@@ -190,7 +166,7 @@ active = 'Neumann_inlet_u Neumann_outlet_u Neumann_inlet_v Neumann_outlet_v Neum
 
   petsc_options = '-ksp_converged_reason -snes_converged_reason'
 
-  solve_type = PJFNK
+#  solve_type = PJFNK
 #  nl_max_its = 30
 #  l_max_its = 1000
 #  petsc_options_iname = '-pc_type -pc_hypre_type'

@@ -11,6 +11,8 @@
 #define DIFFUSIONBC_H
 
 #include "IntegratedBC.h"
+// #include <boost/numeric/ublas/vector.hpp>
+// #include "func_bssanova_2.hpp"
 
 class DiffusionBC;
 

@@ -8,6 +8,11 @@
 //* https://www.gnu.org/licenses/lgpl-2.1.html
 
 #include "Dopant.h"
+//#include <boost/numeric/ublas/vector.hpp>
+//#include "funeval_base.hpp"
+//#include "func_bssanova_2.hpp"
+//#include 
+
 
 registerMooseObject("MooseApp", Dopant);
 
@@ -75,16 +80,94 @@ Dopant::Dopant(const InputParameters & parameters)
 Real
 Dopant::computeQpResidual()
 {
+  /*  boost::numeric::ublas::vector<double> Betas, Betas1;
+  boost::numeric::ublas::vector<double> Par;
+  func_bssanova DiskFunc;
+  double diskDer = 0;
+  double diskRes = 0; 
+  bool diskOn = false;
+  std::string DiskFile = "config/config_Discrepancy.txt";
+
+  Betas.resize(5);
+  Betas[0] = 0.8422e10; // B_y1
+  Betas[1] = 2.9252e10; // B_y2
+  Betas[2] = -2.0418e9; // B_vy
+  Betas[3] = 1.1804e-9; // B_yp
+  Betas[4] = 0;         // B_yyp
+  
+  diskOn = DiskFunc.SplineConfig(DiskFile);
+  if (!diskOn) {
+    std::cout << "There is an issue with the Discrepancy file configuration" << std::endl;
+    return 0;
+  }
+
+  Betas1.resize(DiskFunc.betsize());
+  Par.resize(2);
+  //  std::cout << Betas[0];
+  //  Betas1[0] = 0.8422e10;
+  Par[0] = _u[_qp]; // 0.4375;
+  Par[1] = _vac_var[_qp];
+
+  for (int i = 0; i < Betas1.size(); i++) {
+    Betas1[i] = Betas[i];
+  }
+
+  DiskFunc.SplineEval(Par,Betas1,diskRes);
+  DiskFunc.SplineDeriv2(0,Par,Betas1,diskDer);
+  std::cout << std::endl << diskDer << std::endl;
+  */
+  /*  return ((-_ny * _Z * _F * _phi_var[_qp]) +
+	  _R * _T * _ny * log(_u[_qp] / (1 - _u[_qp])) + _lambd + diskDer) *
+	  _test[_i][_qp];/**/
+//*
   return _cd * _grad_u[_qp] * _grad_test[_i][_qp] +
          ((-_ny * _Z * _F * _phi_var[_qp]) + (_nyv * _fyv * _vac_var[_qp]) +
           2 * _nyy * _fy * _u[_qp] + _R * _T * _ny * log(_u[_qp] / (1 - _u[_qp])) + _lambd) *
-             _test[_i][_qp];
+	  _test[_i][_qp]; /**/
 }
 
 //*
 Real
 Dopant::computeQpJacobian()
 {
+  /*
+  boost::numeric::ublas::vector<double> Betas, Betas1;
+  boost::numeric::ublas::vector<double> Par;
+  func_bssanova DiskFunc;
+  double diskDer = 0;
+  double diskRes = 0; 
+  bool diskOn = false;
+  std::string DiskFile = "config/config_Discrepancy_JD.txt";
+
+  Betas.resize(5);
+  Betas[0] = 0.8422e10; // B_y1
+  Betas[1] = 2.9252e10; // B_y2
+  Betas[2] = -2.0418e9; // B_vy
+  Betas[3] = 1.1804e-9; // B_yp
+  Betas[4] = 0;         // B_yyp
+  
+  diskOn = DiskFunc.SplineConfig(DiskFile);
+  if (!diskOn) {
+    std::cout << "There is an issue with the Discrepancy file configuration" << std::endl;
+    return 0;
+  }
+
+  Betas1.resize(DiskFunc.betsize());
+  Par.resize(2);
+  //  std::cout << Betas[0];
+  //  Betas1[0] = 0.8422e10;
+  Par[0] = _u[_qp]; // 0.4375;
+  Par[1] = _vac_var[_qp];
+
+  for (int i = 0; i < Betas1.size(); i++) {
+    Betas1[i] = Betas[i];
+  }
+
+  DiskFunc.SplineEval(Par,Betas1,diskRes);
+  DiskFunc.SplineDeriv2(0,Par,Betas1,diskDer);
+  std::cout << std::endl << diskDer << std::endl;
+
+  */
   return +_cd * _grad_phi[_j][_qp] * _grad_test[_i][_qp] +
          2 * _nyy * _fy * _test[_i][_qp] * _phi[_j][_qp] +
          _R * _T * _ny * (1 / (_u[_qp] * (1 - _u[_qp]))) * _test[_i][_qp] * _phi[_j][_qp];

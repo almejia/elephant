@@ -8,6 +8,10 @@
 //* https://www.gnu.org/licenses/lgpl-2.1.html
 
 #include "Vacancy.h"
+//#include "Dopant.C"
+//#include <boost/numeric/ublas/vector.hpp>
+//#include "funeval_base.hpp"
+//#include "func_bssanova_2.hpp"
 
 registerMooseObject("MooseApp", Vacancy);
 
@@ -74,11 +78,92 @@ Vacancy::Vacancy(const InputParameters & parameters)
 Real
 Vacancy::computeQpResidual()
 {
+  /*  boost::numeric::ublas::vector<double> Betas, Betas1;
+  //  boost::numeric::ublas::vector<double> Beta_v;
+  //  boost::numeric::ublas::vector<double> Beta_vy;
+  //  boost::numeric::ublas::vector<double> Beta_vp;
+
+  boost::numeric::ublas::vector<double> Par;
+  //  boost::numeric::ublas::vector<double> Par_V;
+  //  boost::numeric::ublas::vector<double> Par_D;
+  //  boost::numeric::ublas::vector<double> Par_P;
+  
+  //  func_bssanova DiskFunc;
+  //  bool diskOn = false;
+  //  std::string DiskFile = "config/config_Discrepancy.txt";
+
+  func_bssanova DiskFunc_vp;
+  double diskRes_vp = 0;
+  double diskDer_vp = 0;
+  bool diskOn = false;
+  std::string DiskFile_vp = "config/config_Disc_vp.txt";
+
+  //  diskOn = DiskFunc.SplineConfig(DiskFile);
+  //  if (!diskOn) {
+  //    std::cout << "There is an issue with the Discrepancy file configuration" << std::endl;
+  //   return 0;
+  //  }
+
+  diskOn = DiskFunc_vp.SplineConfig(DiskFile_vp);
+  if (!diskOn) {
+    std::cout << "There is an issue with the Discrepancy file configuration" << std::endl;
+   return 0;
+  }
+  
+  Betas.resize(5);
+  Betas[0] = 1.9002e10; // B_v1
+  Betas[1] = 0.6241e10; // B_v2
+  Betas[2] = -2.0418e9; // B_vy
+  Betas[3] = 6.3635e-9; // B_vp
+  Betas[4] = 0;         // B_vvp
+  
+  Betas1.resize(DiskFunc_vp.betsize());
+  Par.resize(2);
+  
+  Par[0] = _u[_qp]; // 0.4375;
+  Par[1] =  _dop_var[_qp];
+  
+  //  Par_V.resize(1);
+  //  Par_D.resize(1);
+  //  Par_P.resize(1);
+
+  //  std::cout << Betas[0];
+  //  Betas[0] = 1.9002e10;
+  //  Beta_v[0] = 1.9002e10;
+  //  Beta_v[1] = 0.6241e10;
+  //  Par[0] = _u[_qp];
+  //  Par_V[0] = _u[_qp];
+  //  Par_D[0] = _dop_var[_qp];
+  //  Par_P[0] = _phi_var[_qp];
+
+  for (int i = 0; i < Betas1.size(); i++) {
+    Betas1[i] = Betas[i];
+  }
+
+  //  DiskFunc.SplineEval(Par,Betas,diskRes);
+  //  DiskFunc.SplineDeriv(0,Par,Betas,diskDer);
+  //  std::cout << std::endl << diskRes << " " << diskDer << " " << _u[_qp] << std::endl;
+
+  DiskFunc_vp.SplineEval(Par,Betas1,diskRes_vp);
+  DiskFunc_vp.SplineDeriv2(0,Par,Betas1,diskDer_vp);
+  //  std::cout << std::endl << diskRes_vp << " " << diskDer_vp << " " << _u[_qp] << std::endl; */
+  
+  /*  
+  return ((_nv * 2 * _F * _phi_var[_qp]) + _R * _T * _nv * log(_u[_qp] / (1 - _u[_qp])) + _lambv +
+	  diskDer_vp) * _test[_i][_qp];
+
+	  }/**/
+//  return _cv * _grad_u[_qp] * _grad_test[_i][_qp] +
+//         ((_nv * 2 * _F * _phi_var[_qp]) + (_nyv * _fyv * _dop_var[_qp]) +
+//          2 * _nvv * _fv * _u[_qp] + _R * _T * _nv * log(_u[_qp] / (1 - _u[_qp])) + _lambv) *
+//             _test[_i][_qp];
+//*
   return _cv * _grad_u[_qp] * _grad_test[_i][_qp] +
          ((_nv * 2 * _F * _phi_var[_qp]) + (_nyv * _fyv * _dop_var[_qp]) +
           2 * _nvv * _fv * _u[_qp] + _R * _T * _nv * log(_u[_qp] / (1 - _u[_qp])) + _lambv) *
              _test[_i][_qp];
-}
+
+} //*/
 
 //*
 Real

@@ -11,6 +11,10 @@
 #include "Moose.h"
 #include "MooseApp.h"
 #include "AppFactory.h"
+//#include <boost/numeric/ublas/vector.hpp>
+//#include "funeval_base.hpp"
+//#include "func_bssanova_2.hpp"
+
 
 // Create a performance log
 PerfLog Moose::perf_log("Elephant");

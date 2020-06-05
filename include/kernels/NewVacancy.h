@@ -7,46 +7,49 @@
 //* Licensed under LGPL 2.1, please see LICENSE for details
 //* https://www.gnu.org/licenses/lgpl-2.1.html
 
-#ifndef DOPANT_H
-#define DOPANT_H
+#ifndef NEWVACANCY_H
+#define NEWVACANCY_H
 
 #include "Kernel.h"
-//#include <boost/numeric/ublas/vector.hpp>
 
-class Dopant;
+class NewVacancy;
 
 template <>
-InputParameters validParams<Dopant>();
+InputParameters validParams<NewVacancy>();
 
-class Dopant : public Kernel
+class NewVacancy : public Kernel
 {
 public:
-  Dopant(const InputParameters & parameters);
+  NewVacancy(const InputParameters & parameters);
 
 protected:
   virtual Real computeQpResidual() override;
   virtual Real computeQpJacobian() override;
   virtual Real computeQpOffDiagJacobian(unsigned int jvar) override;
 
-  const VariableValue & _vac_var;
+  const VariableValue & _ele_var;
   const VariableValue & _phi_var;
 
-  unsigned int _v_var;
+  const VariableValue & _mu_var;
+  
+  unsigned int _e_var;
   unsigned int _p_var;
 
+  unsigned int _m_var;
+  
   Real _R; /** Universal constant [J/mol*K] */
   Real _T; /** Temperature [K] */
 
-  Real _Z;   /** Dopant chemcial formula index */
-  Real _ny;  /** Cation site density [mol/m^3] */
-  Real _nyy; /** Cation-cation density [mol/m^3] */
+  Real _Dop; /** Dopant fixed concentration */
+  Real _nv;  /** Cation site density [mol/m^3] */
+  Real _nvv; /** Anion-anion density [mol/m^3] */
   Real _nyv; /** Anion-cation density [mol/m^3] */
   Real _F;   /** 96485.0 */
-  Real _fy;  /** Dopant self-interaction [J/mol] */
+  Real _fv;  /** Dopant self-interaction [J/mol] */
   Real _fyv; /** Dopant-vacancy interaction [J/mol] */
-  Real _cd;  /** Dopant gradient energy coefficient [J/mol-m] */
+  Real _cv;  /** Dopant gradient energy coefficient [J/mol-m] */
 
-  Real _lambd; /** Lagrange multiplier */
+  Real _lambv; /** Lagrange multiplier */
 };
 
-#endif /* DOPANT_H */
+#endif /* NEWVACANCY_H */
