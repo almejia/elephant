@@ -70,5 +70,5 @@ CoupledFluxBC::computeQpResidual()
 {
   // For this Neumann BC grad(u)=alpha * v on the boundary.
   // We use the term produced from integrating the diffusion operator by parts.
-  return -_test[_i][_qp] * _alpha * (_eta2 * exp(-_dHdd2/(_R*_T))) * (_the_var[_qp]*_vac_var[_qp]*_ele_var[_qp]*_ele_var[_qp] - (_Pco * (1-_vac_var[_qp]-_the_var[_qp]) * (1-_vac_var[_qp]-_the_var[_qp]) * (1-_ele_var[_qp]) * (1-_ele_var[_qp]) /(exp(_dS2/_R)*exp(-_dH2/(_R*_T))) ) );
+  return _test[_i][_qp] * _alpha * (_eta2 * exp(-_dHdd2/(_R*_T))) * (_the_var[_qp]*_vac_var[_qp]*_ele_var[_qp]*_ele_var[_qp] - (_Pco * (1-_vac_var[_qp]-_the_var[_qp]) * (1-_vac_var[_qp]-_the_var[_qp]) * (1-_ele_var[_qp]) * (1-_ele_var[_qp]) /(exp(_dS2/_R)*exp(-_dH2/(_R*_T))) ) );
 }

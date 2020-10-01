@@ -31,7 +31,7 @@ SurfaceNeumannBC::computeQpResidual()
 {
   // For this Neumann BC grad(u)=alpha * v on the boundary.
   // We use the term produced from integrating the diffusion operator by parts.
-  return (_Ns * _fo) * _test[_i][_qp] ;
+  return -(_Ns * _fo) * _test[_i][_qp] ;
 }
 
 

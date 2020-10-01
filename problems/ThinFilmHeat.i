@@ -3,17 +3,22 @@
 ## Input file ElePhaNT MOOSE app
 
 [Mesh]
-  type = GeneratedMesh
-  dim = 2                # Mesh dimensions: 1D, 2D, 3D
-  nx = 75               # 1D: Number of elements in X-direction 
-  ny = 40                # 2D: Number of elements in Y-direction
-  nz = 1                 # 3D: Number of elements in Z-direction
-  xmax = 500000e-9        # Cell base length (thickness) [m] = 1000 [nm]
-  ymin = -3000000e-9 #-3000000e-9      # 2D cell min height [m] = -2000 [nm]
-  ymax = 3000000e-9 #3000000e-9       # 2D cell max height [m] = 2000 [nm]
-  zmax = 2000e-9         # 3D cell width [m] = 400 [nm]
-  bias_x = 1.226           # X-bias 0.5 - 2.0 (left - right element-size refinement)
-  bias_y = 1             # Y-bias 0.5 - 2.0 (top - bottom element-size refinement)
+#  file = 'ecell.msh'
+#  file = 'FinalCell2.msh'
+#  file = 'ThinFilm.msh'
+#  file = 'ThinFilm_Coarse.msh'
+  file = 'Combined.msh'
+#  type = GeneratedMesh
+#  dim = 2                # Mesh dimensions: 1D, 2D, 3D
+#  nx = 60                # 1D: Number of elements in X-direction 
+#  ny = 40                # 2D: Number of elements in Y-direction
+#  nz = 1                 # 3D: Number of elements in Z-direction
+#  xmax = 2000e-9         # Cell base length [m] = 200 [nm]
+#  ymin = -10000e-9
+#  ymax = 10000e-9         # 2D cell height [m] = 400 [nm]
+#  zmax = 2000e-9         # 3D cell width [m] = 400 [nm]
+#  bias_x = 1.2           # X-bias 0.5 - 2.0 (left - right element-size refinement)
+#  bias_y = 1             # Y-bias 0.5 - 2.0 (top - bottom element-size refinement)
 []
 
 #################################################################################################################
@@ -23,6 +28,7 @@
   V = 0.001          # VOLTAGE [V]
   T = 773            # TEMPERATURE [K] = 500 Celsius
   R = 8.314          # GAS CONSTANT [J/mol.K] -> PV=nRT
+  F = 96485          # ENERGY (Faraday) CONSTANT [J/mol]
   
   Dop = 0.1          # FIXED GADOLINIA DOPANT CONCENTRATION
   nq = 4.1488e4      # CATION-ELECTRON SITE DENSITY
@@ -39,12 +45,14 @@
 
   gq = 1.18e-9       # ELECTRON GRADIENT ENERGY COEFFICIENT
   gv = 1.07e-9       # VACANCY GRADIENT ENERGY COEFFICIENT
-  F = 96485          # ENERGY (Faraday) CONSTANT [J/mol]
 
   Pco = 0.004        # CO PARTIAL PRESSURE [atm] (0.04)
   Pco2 = 0.2         # CO2 PARTIAL PRESSURE [atm]
-  
-  eta1 = -1e3         # Pre-EXPONTENTIAL FACTOR: zeta_ads (max 1e-6 -> converging)
+
+  lambv = 1          # 1e5
+  lambd = 1          # 1e5
+    
+  eta1 = 1e3         # Pre-EXPONTENTIAL FACTOR: zeta_ads (max 1e-6 -> converging)
   eta2 = 1e2         # Pre-EXPONTENTIAL FACTOR: zeta_inc (max 1e8)
   dHdd1 = 3.0e4      # ADS-1 ENTHALPY DoubleDagger [J] = [Kg.m2/s2] (4e5)
   dHdd2 = 1.0e4      # INC-2 ENTHALPY DoubleDagger [J] (1e5)
@@ -58,53 +66,53 @@
 #################################################################################################################
   
 [MeshModifiers]
-
+active = ''
   [./subdomain_id]
     type = AssignElementSubdomainID
     subdomain_ids = '
- 3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
+    3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  0 0 0 0 0 0 0 0 0 0 
+    3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  0 0 0 0 0 0 0 0 0 0
+    3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  0 0 0 0 0 0 0 0 0 0
+    3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  0 0 0 0 0 0 0 0 0 0
+    3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  0 0 0 0 0 0 0 0 0 0
+    3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  0 0 0 0 0 0 0 0 0 0
+    3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  0 0 0 0 0 0 0 0 0 0
+    3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  0 0 0 0 0 0 0 0 0 0
+    3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  0 0 0 0 0 0 0 0 0 0
+    3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  0 0 0 0 0 0 0 0 0 0
 
- 3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  3 3 3 3 3 3 3 3 3 3  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
+    4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  0 0 0 0 0 0 0 0 0 0
+    4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  0 0 0 0 0 0 0 0 0 0
+    4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  0 0 0 0 0 0 0 0 0 0
+    4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  0 0 0 0 0 0 0 0 0 0
+    4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  0 0 0 0 0 0 0 0 0 0
+    4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  0 0 0 0 0 0 0 0 0 0
+    4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  0 0 0 0 0 0 0 0 0 0
+    4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  0 0 0 0 0 0 0 0 0 0
+    4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  0 0 0 0 0 0 0 0 0 0
+    4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  0 0 0 0 0 0 0 0 0 0
 
- 4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  4 4 4 4 4 4 4 4 4 4  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
+    1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  0 0 0 0 0 0 0 0 0 0
+    1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  0 0 0 0 0 0 0 0 0 0
+    1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  0 0 0 0 0 0 0 0 0 0
+    1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  0 0 0 0 0 0 0 0 0 0
+    1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  0 0 0 0 0 0 0 0 0 0
+    1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  0 0 0 0 0 0 0 0 0 0
+    1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  0 0 0 0 0 0 0 0 0 0
+    1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  0 0 0 0 0 0 0 0 0 0
+    1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  0 0 0 0 0 0 0 0 0 0
+    1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  0 0 0 0 0 0 0 0 0 0
 
- 1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 2 2 2 2  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 2 2 2 2  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 2 2 2 2  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0
- 1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 2 2 2 2  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0 0 0 0 0 0  0 0 0 0 0'
+    1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 2 2 2 2  0 0 0 0 0 0 0 0 0 0
+    1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 2 2 2 2  0 0 0 0 0 0 0 0 0 0
+    1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 2 2 2 2  0 0 0 0 0 0 0 0 0 0
+    1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 2 2 2 2  0 0 0 0 0 0 0 0 0 0
+    1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 2 2 2 2  0 0 0 0 0 0 0 0 0 0
+    1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 2 2 2 2  0 0 0 0 0 0 0 0 0 0
+    1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 2 2 2 2  0 0 0 0 0 0 0 0 0 0
+    1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 2 2 2 2  0 0 0 0 0 0 0 0 0 0
+    1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 2 2 2 2  0 0 0 0 0 0 0 0 0 0
+    1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 1 1 1 1  1 1 1 1 1 1 2 2 2 2  0 0 0 0 0 0 0 0 0 0'
   [../]
 
   [./side_set1]
@@ -179,27 +187,29 @@
 #################################################################################################################
   
 [Variables]
-active = 'q v phi muq muv theta phi_ysz'
+active = 'q ,v phi'
+#active = 'q'
+#active = 'q v phi muq muv phi_ysz'
   [./q]
     order = FIRST
     family = LAGRANGE
     initial_condition = 0.1
     scaling = 1
-    block = 1
+    block = 'CeO2' #1
   [../]
   [./v]
     order = FIRST
     family = LAGRANGE
     initial_condition = 0.05
     scaling = 1
-    block = 1
+    block = 'CeO2' #1
   [../]
   [./phi]
     order = FIRST
     family = LAGRANGE
     initial_condition = 0.0
     scaling = 1
-    block = 1
+    block = 'CeO2' #1
   [../]
   
   [./muq]
@@ -207,14 +217,14 @@ active = 'q v phi muq muv theta phi_ysz'
     family = LAGRANGE
     initial_condition = 0.0
     scaling = 1
-    block = 1
+    block = 'CeO2' #1
   [../]
   [./muv]
     order = FIRST
     family = LAGRANGE
     initial_condition = 0.0
     scaling = 1
-    block = 1
+    block = 'CeO2' #1
   [../]
 
   [./phi_ysz]
@@ -222,7 +232,7 @@ active = 'q v phi muq muv theta phi_ysz'
     family = LAGRANGE
     initial_condition = 0.0
     scaling = 1
-    block = 0
+    block = 'YSZ' #0
   [../]
 
   [./theta]
@@ -230,14 +240,14 @@ active = 'q v phi muq muv theta phi_ysz'
     family = LAGRANGE
     initial_condition = 0.1
     scaling = 1
-    block = 1
+    block = 'CeO2' #1
   [../]
   [./mut]
     order = FIRST
     family = LAGRANGE
     initial_condition = 0.0
     scaling = 1
-    block = 1
+    block = 'CeO2' #1
   [../]
 
 []
@@ -246,52 +256,81 @@ active = 'q v phi muq muv theta phi_ysz'
 #################################################################################################################
   
 [Kernels]
-active = 'phi_kernel electron_kernel vacancy_kernel mu_electron mu_vacancy theta phi_ysz'
+active = 'phi_k q_k v_k'  
+#active = 'heat_conduction'
+#active = 'phi_kernel electron_kernel vacancy_kernel mu_electron mu_vacancy phi_ysz'
 #active = 'phi_kernel electron_kernel vacancy_kernel mu_electron mu_vacancy theta_kernel mu_theta'
-
-  [./phi_kernel]           # Kernel/Governing Eqn for ELECTROSTATIC POTENTIAL
-    type = EPotential2D    # Name of physics kernel used
-    variable = phi         # Main Variable that kernel is solving
-    ele = q                # Coupled variable 1 = coupled electron site fraction
-    vac = v                # Coupled variable 2 = coupled vacancy site fraction
-    block = 1
+  [./phi_k]
+    type = EPotential
+    variable = phi
+    ele = q
+    vac = v
+    block = 'CeO2'
   [../]
-  [./electron_kernel]      # Governing Eqn for ELECTRON SITE FRACTION
-    type = Electron2D
+  [./q_k]
+    type = ElectronEq
     variable = q
     vac = v
     phi = phi
-    mu = muq
-    lambq = 0              # Lagrange multiplier value
-    block = 1
+    block = 'CeO2'
   [../]
-  [./vacancy_kernel]       # Governing Eqn for VACANCY SITE FRACTION
-    type = Vacancy2D
+  [./v_k]
+    type = VacancyEq
     variable = v
     ele = q
     phi = phi
-    mu = muv
-    lambv = 0              # Lagrange multiplier value
-    block = 1
+    block = 'CeO2'
+  [../]
+  
+  [./heat_conduction]
+    type = Diffusion
+    variable = q
+    block = 'CeO2'
+  [../]
+  
+  [./phi_kernel]           # Kernel/Governing Eqn for ELECTROSTATIC POTENTIAL
+    type = EPotential      # Name of physics kernel used
+    variable = phi         # Main Variable that kernel is solving
+    ele = q                # Coupled variable 1 = coupled electron site fraction
+    vac = v                # Coupled variable 2 = coupled vacancy site fraction
+    block = 'CeO2' #1
+  [../]
+  [./electron_kernel]      # Governing Eqn for ELECTRON SITE FRACTION
+    type = ElectronKin
+    variable = q
+    vac = v
+    phi = phi
+    muq = muq
+    #lambq = 0              # Lagrange multiplier value
+    block = 'CeO2' #1
+  [../]
+  [./vacancy_kernel]       # Governing Eqn for VACANCY SITE FRACTION
+    type = VacancyKin
+    variable = v
+    ele = q
+    phi = phi
+    muv = muv
+    #lambv = 0              # Lagrange multiplier value
+    block = 'CeO2' #1
   [../]
 
   [./mu_electron]          # Governing Eqn for ELECTRON ELECTROCHEMICAL POTENTIAL
-    type = ChemPotential   # Active kernel that couples electrochemical potential of electrons and electron site fraction concentration
+    type = ChemPotential2D   # Active kernel that couples electrochemical potential of electrons and electron site fraction concentration
 #    type = SplitPCRes
     variable = muq         # Main variable for this kernel is the electrochemical potential of electrons (Mu_q)
     con = q                # Coupled variable = electron site fraction concentration
     Ns = 4.1488e4          # Site density
     M = 3.15e-10           # Electron mobility
-    block = 1
+    block = 'CeO2' #1
   [../]
   [./mu_vacancy]           # Governing Eqn for VACANCY ELECTROCHEMICAL POTENTIAL
-    type = ChemPotential
+    type = ChemPotential2D
 #    type = SplitPCRes
     variable = muv
     con = v
     Ns = 8.2975e4
     M =  1.0425e-12
-    block = 1
+    block = 'CeO2' #1
   [../]
 
 
@@ -300,7 +339,7 @@ active = 'phi_kernel electron_kernel vacancy_kernel mu_electron mu_vacancy theta
     variable = theta
     Ns = 1.3e-5
     Mob = 1e-4
-    block = 1
+    block = 'CeO2' #1
   [../]
   
   [./theta_kernel]
@@ -308,7 +347,7 @@ active = 'phi_kernel electron_kernel vacancy_kernel mu_electron mu_vacancy theta
     variable = theta
     mu = mut
     nq = 1.3e-5
-    block = 1
+    block = 'CeO2' #1
   [../]
   [./mu_theta]
     type = ChemPotential
@@ -317,25 +356,25 @@ active = 'phi_kernel electron_kernel vacancy_kernel mu_electron mu_vacancy theta
     con = theta
     Ns = 1.3e-5
     M = 1e-4
-    block = 1
+    block = 'CeO2' #1
   [../]
 
 
   [./q_dot]
     type = TimeDerivative
     variable = q
-    block = 1
+    block = 'CeO2' #1
   [../]
   [./v_dot]
     type = TimeDerivative
     variable = v
-    block = 1
+    block = 'CeO2' #1
   [../]
 
   [./phi_ysz]            # Governing Eqn for ELECTROLYTE ELECTROSATIC POTENTIAL = Laplace Eqn
     type = Diffusion
     variable = phi_ysz
-    block = 0
+    block = 'YSZ' #0
   [../]
 
 		       
@@ -345,6 +384,7 @@ active = 'phi_kernel electron_kernel vacancy_kernel mu_electron mu_vacancy theta
 #################################################################################################################
 
 [Functions]
+active = ''
   [./au_bc]
     type = ParsedFunction
     value = 964.85*t*t
@@ -355,13 +395,28 @@ active = 'phi_kernel electron_kernel vacancy_kernel mu_electron mu_vacancy theta
 #################################################################################################################
   
 [BCs]
+active = 'Neumann_inlet_q Neumann_outlet_q Neumann_inlet_v Neumann_outlet_v Neumann_inlet_phi Neumann_outlet_phi'
+#active = 'surf sink'  
 #active = 'Neumann_inlet_q Neumann_outlet_q Neumann_inlet_v Neumann_outlet_v Neumann_inlet_phi Neumann_outlet_phi N_inlet_muq N_inlet_muv muq_ce_au muv_ce_au surface interface'
-active = 'Neumann_inlet_q Neumann_outlet_q Neumann_inlet_v Neumann_outlet_v Neumann_inlet_phi Neumann_outlet_phi N_inlet_muq N_inlet_muv muq_ce_au surface interface ysz_pt'
+#active = 'Neumann_inlet_q Neumann_outlet_q Neumann_inlet_v Neumann_outlet_v Neumann_inlet_phi Neumann_outlet_phi N_inlet_muq N_inlet_muv muq_ce_au interface ysz_pt'
 
+  [./surf]
+    type = NeumannBC
+    variable = q
+    boundary = 'top_CeO2'
+    value = 1.5
+  [../]
+  [./sink]
+    type = DirichletBC
+    variable = q
+    boundary = 'CeO2_YSZ'
+    value = 10
+  [../]
+  
   [./Neumann_inlet_q]
     type = SurfaceNeumannBC
     variable = q
-    boundary = left
+    boundary = 'top_CeO2' #left
     Ns = 1.3e-5
     fo = 2e5
     #value = 2.5
@@ -369,14 +424,14 @@ active = 'Neumann_inlet_q Neumann_outlet_q Neumann_inlet_v Neumann_outlet_v Neum
   [./Neumann_outlet_q]
     type = NeumannBC
     variable = q
-    boundary = ceo2_ysz
+    boundary = 'CeO2_YSZ' #'bottom_YSZ' #ceo2_ysz
     value = 0
   [../]
 
   [./Neumann_inlet_v]
     type = SurfaceNeumannBC
     variable = v
-    boundary = left
+    boundary = 'top_CeO2' #left
     Ns = 2.6e-5
     fo = 1.6441e5
     #value = 4.2746 
@@ -384,7 +439,7 @@ active = 'Neumann_inlet_q Neumann_outlet_q Neumann_inlet_v Neumann_outlet_v Neum
   [./Neumann_outlet_v]
     type = NeumannBC
     variable = v
-    boundary = ceo2_ysz 
+    boundary = 'CeO2_YSZ' #ceo2_ysz 
     value = 0
   [../]
 
@@ -392,81 +447,107 @@ active = 'Neumann_inlet_q Neumann_outlet_q Neumann_inlet_v Neumann_outlet_v Neum
     type = NeumannBC #SurfaceFluxBC #NeumannBC
     variable = phi
     #theta = theta
-    boundary = left
+    boundary = 'top_CeO2' #left
     value = 0
   [../]
   [./Neumann_outlet_phi]
     type = NeumannBC #DirichletBC
     variable = phi
-    boundary = ceo2_ysz
+    boundary = 'CeO2_YSZ' #ceo2_ysz
     value = 0
   [../]
 
   [./N_inlet_muq]
-    type = CoupledFluxBC  #DirichletBC #NeumannBC#
+    type = NeumannBC #CoupledFluxBC  #DirichletBC #NeumannBC#
     variable = muq
-    boundary = left 
-    #value = -1e4  # -1e-4 #1e-14
-    alpha = 2
-    the = theta
-    ele = q
-    vac = v
-    Ns = 4.1488e4
-    M = 3.15e-10
+    boundary = 'top_CeO2' #left 
+    value = -1e4  # -1e-4 #1e-14
+    #alpha = 2
+    #the = theta
+    #ele = q
+    #vac = v
+    #Ns = 4.1488e4
+    #M = 3.15e-10
   [../]
   [./N_inlet_muv]
-    type = CoupledFluxBC #NeumannBC#DirichletBC #NeumannBC#
+    type = NeumannBC #CoupledFluxBC #NeumannBC#DirichletBC #NeumannBC#
     variable = muv
-    boundary = left
-    #value = -1e4  # -1e-6# 1e-14
-    alpha = 1
-    the = theta
-    ele = q
-    vac = v
-    Ns = 8.2975e4
-    M =  1.0425e-12
+    boundary = 'top_CeO2' #left
+    value = -1e4  # -1e-6# 1e-14
+    #alpha = 1
+    #the = theta
+    #ele = q
+    #vac = v
+    #Ns = 8.2975e4
+    #M =  1.0425e-12
   [../]
   [./muq_ce_au]
     type = FunctionDirichletBC
     variable = muq
-    boundary = au_interface
+    boundary = 'YSZ_Au' #au_interface
     function = au_bc
 #    value = 96485e-2    
   [../]
   [./muv_ce_au]
     type = DirichletBC
     variable = muv
-    boundary = ceo2_ysz
+    boundary = 'CeO2_YSZ' #ceo2_ysz
     value = 8e5 #2e5
   [../]
 
   [./interface]
+    type = CMatchedValue2DBC
+    variable = muv 
+    boundary = 'CeO2_YSZ' #ceo2_ysz
+    v = phi_ysz
+    nv = 0
+  [../]  
+  [./interface2]
     type = CMatchedValueBC
-    variable = phi_ysz
-    boundary = ceo2_ysz
+    variable = phi_ysz 
+    boundary = 'CeO2_YSZ' #ceo2_ysz
     v = muv
     nv = 0
   [../]  
 
+  [./interface3]
+    type = MatchedElectrodeBC
+    variable = phi_ysz 
+    boundary = 'CeO2_YSZ' #ceo2_ysz
+    v = muv
+    nv = 0
+  [../]  
+  [./interface4]
+    type = DirichletBC
+    variable = phi_ysz 
+    boundary = 'CeO2_YSZ' #ceo2_ysz
+    value = 1e5
+  [../]  
+  [./interface5]
+    type = MatchedValueBC
+    variable = muv 
+    boundary = 'CeO2_YSZ' #ceo2_ysz
+    v = phi_ysz
+  [../]  
 
   [./surface]
     type = CSurface
     variable = theta
-    boundary = left
+    boundary = 'top_CeO2' #left
     ele = q
     vac = v
   [../]
   [./bulk]
     type = DirichletBC
     variable = theta
-    boundary = ceo2_ysz
+    boundary = 'CeO2_YSZ' #ceo2_ysz
     value = 0
   [../]
 
   [./ysz_pt]
     type = DirichletBC
     variable = phi_ysz
-    boundary = ysz_pt
+    boundary = 'Pt' #ysz_pt
     value = 0
   [../]
 
@@ -481,26 +562,54 @@ active = ''
     type = ElementAverageValue
     variable = q
   [../]
+  [./surface]
+    type = SideIntegralVariablePostprocessor
+    variable = q
+    boundary = left
+  [../]
+  [./surface_flux_electrons]
+    type = SideFluxIntegral
+    variable = q
+    diffusivity = 1
+    boundary = left
+  [../]
+  [./surface_flux_average_electrons]
+    type = SideFluxAverage
+    variable = q
+    diffusivity = 1
+    boundary = left
+  [../]
+  [./surface_flux_phi]
+    type = SideFluxIntegral
+    variable = phi
+    diffusivity = 1
+    boundary = left
+  [../]
+  [./q_residual]
+    type = VariableResidual
+    variable = q
+  [../]
 []
 
 #################################################################################################################
 #################################################################################################################
   
 [VectorPostprocessors]
+active = ''
   [./line_x]
     type = LineValueSampler
-    start_point = '0 1000e-9 0'
-    end_point = '5e-9 1000e-9 0'
+    start_point = '1e-3 400e-9 0' #'4e-3 2.0004e-3 0'
+    end_point = '1e-3 350e-9 0' #'4e-3 2.00035e-3 0'
     num_points = 100
-    variable = 'q v phi muq muv theta'
+    variable = 'q v phi muq muv'
     sort_by = 'id'
   [../]
   [./line_y]
     type = LineValueSampler
-    start_point = '0 500e-9 0'
-    end_point = '0 1500e-9 0'
+    start_point = '1e-3 400e-9 0' #'4e-3 2.0004e-3 0'
+    end_point = '1.01e-3 400e-9 0' #'4.5e-3 2.0004e-3 0'
     num_points = 100
-    variable = 'q v phi muq muv theta'
+    variable = 'q v phi muq muv'
     sort_by = 'id'
   [../]
 []
@@ -510,15 +619,15 @@ active = ''
 
 [Executioner]
 
-  type = Transient
-  dt = 0.1
-  solve_type = NEWTON
-  end_time = 1
+#  type = Transient
+#  dt = 0.1
+#  solve_type = NEWTON
+#  end_time = 1
 
   
-#  type = Steady
+  type = Steady
 
-#  solve_type = NEWTON
+  solve_type = NEWTON
   nl_max_its = 300
   l_max_its = 100
   petsc_options_iname = '-pc_type'
@@ -554,7 +663,7 @@ active = ''
   [./Indicators]
     [./error]
     type = GradientJumpIndicator
-    variable = phi
+    variable = q
     [../]
   [../]
   [./Markers]

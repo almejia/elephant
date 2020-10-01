@@ -7,28 +7,27 @@
 //* Licensed under LGPL 2.1, please see LICENSE for details
 //* https://www.gnu.org/licenses/lgpl-2.1.html
 
-#ifndef CMATCHEDVALUEBC_H
-#define CMATCHEDVALUEBC_H
+#ifndef MATCHEDELECTRODEBC_H
+#define MATCHEDELECTRODEBC_H
 
 #include "NodalBC.h"
 
 // Forward Declarations
-class CMatchedValueBC;
+class MatchedElectrodeBC;
 
 template <>
-InputParameters validParams<CMatchedValueBC>();
+InputParameters validParams<MatchedElectrodeBC>();
 
 /**
  * Implements a simple coupled boundary condition where u=v on the boundary.
  */
-class CMatchedValueBC : public NodalBC
+class MatchedElectrodeBC : public NodalBC
 {
 public:
-  CMatchedValueBC(const InputParameters & parameters);
+  MatchedElectrodeBC(const InputParameters & parameters);
 
 protected:
   virtual Real computeQpResidual() override;
-  virtual Real computeQpJacobian() override;
   virtual Real computeQpOffDiagJacobian(unsigned int jvar) override;
 
   const VariableValue & _v;
@@ -45,4 +44,4 @@ protected:
 
 };
 
-#endif // CMATCHEDVALUEBC_H
+#endif // MATCHEDELECTRODEBC_H

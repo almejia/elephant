@@ -4,24 +4,55 @@
   type = GeneratedMesh
     dim = 2
     nx = 20                # 1D: Number of elements in X-direction 
-    ny = 40                # 2D: Number of elements in Y-direction
-    xmax = 6e-3            # Cell base length [m] = 6 [mm]
-    ymax = 0.2e-3          # 2D cell height [m] = 0.2 [mm]
+    ny = 70                # 2D: Number of elements in Y-direction
+    xmax = 6e-5            # Cell base length [m] = 6 [mm]
+    ymax = 5e-6            # 2D cell height [m] = 0.2 [mm]
     bias_x = 1.0           # X-bias 0.5 - 2.0 (left - right element-size refinement)
-    bias_y = 0.65          # Y-bias 0.5 - 2.0 (top - bottom element-size refinement)
+    bias_y = 0.80          # Y-bias 0.5 - 2.0 (top - bottom element-size refinement)
 []
 
+[GlobalParams]
+  V = 0.001          # VOLTAGE [V]
+  T = 773            # TEMPERATURE [K] = 500 Celsius
+  R = 8.314          # GAS CONSTANT [J/mol.K] -> PV=nRT
+      
+  Z = 1
+      
+  Dop = 0.1          # FIXED GADOLINIA DOPANT CONCENTRATION
+  ny = 4.1488e4      # CATION-ELECTRON SITE DENSITY
+  nyy = 1.6595e5     # CATION-CATION NEXT-NEAREST-NEIGHBOR DENSITY
+  nyv = 3.3190e5     # ANION-CATION NEXT-NEAREST-NEIGHBOR DENSITY
+  nv = 8.2975e4      # ANION SITE DENSITY 
+  nvv = 2.4893e5     # ANION-ANION NEXT-NEAREST-NEIGHBOR DENSITY
+ 
+  fy = 76100         # ELECTRON SELF INTERACTION ENERGY
+  fqv = -16600       # ELECTRON-VACANCY INTERACTION ENERGY
+  fqy = 5000         # ELECTRON-DOPANT INTERACTION ENERGY
+  fyv = -40000       # VACANCY-DOPANT INTERACTION ENERGY
+  fv = 57400         # VACANCY SELF INTERACTION ENERGY
+
+  cd = 1.18e-9       # ELECTRON GRADIENT ENERGY COEFFICIENT
+  cv = 1.07e-9       # VACANCY GRADIENT ENERGY COEFFICIENT
+  F = 96485          # ENERGY (Faraday) CONSTANT [J/mol]
+
+  Pco = 0.004        # CO PARTIAL PRESSURE [atm] (0.04)
+  Pco2 = 0.2         # CO2 PARTIAL PRESSURE [atm]
+  
+  eta1 = 1e3         # Pre-EXPONTENTIAL FACTOR: zeta_ads (max 1e-6 -> converging)
+  eta2 = 1e2         # Pre-EXPONTENTIAL FACTOR: zeta_inc (max 1e8)
+  dHdd1 = 3.0e4      # ADS-1 ENTHALPY DoubleDagger [J] = [Kg.m2/s2] (4e5)
+  dHdd2 = 1.0e4      # INC-2 ENTHALPY DoubleDagger [J] (1e5)
+  dS1 = 0            # ADS REACTION ENTROPY [J/K] = [Kg.m2/s2.K]
+  dS2 = 0            # INC REACTION ENTROPY [J/K]
+  dH1 = 1.0e4        # ADS REACTION ENTHALPY [J] (3e5)
+  dH2 = 1.5e4        # INC REACTION ENTHALPY [J] (1.5e5)
+[]
+
+      
 [MeshModifiers]
   [./subdomain_id]
     type = AssignElementSubdomainID
-    subdomain_ids = '1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
-    1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+    subdomain_ids = '
     1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
     1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
 
@@ -49,6 +80,48 @@
 
     3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
     3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+    3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
+
     3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
     3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
     3 3 3 3 3 4 4 4 4 4 4 4 0 0 0 0 0 0 0 0
@@ -168,17 +241,17 @@
 
   []
 
-  [AuxVariables]
+ # [AuxVariables]
  #   [./lagrange_test]
  #     order = FIRST
  #     family = LAGRANGE
  #   [../]
 
-    [./bounds_dummy]
-      order = FIRST
-      family = LAGRANGE
-    [../]
-  []
+ #   [./bounds_dummy]
+ #     order = FIRST
+ #     family = LAGRANGE
+ #   [../]
+ # []
 
   [Kernels]
   active = 'phi_kernel dopant_kernel vacancy_kernel phi_ysz'
@@ -247,7 +320,7 @@
   []
 
   [BCs]
-  active = 'Neumann_inlet_u Neumann_outlet_u Neumann_inlet_v Neumann_outlet_v Neumann_inlet_phi Neumann_outlet_phi ysz_au ysz_pt'
+  active = 'Neumann_inlet_u Neumann_outlet_u Neumann_inlet_v Neumann_outlet_v Neumann_inlet_phi Neumann_outlet_phi ysz_au ysz_pt ceo2_ysz'
 
     [./Neumann_inlet_u]
       type = NeumannBC
@@ -287,6 +360,13 @@
       boundary = 'ceo2_ysz ceo2_au'
       value = 0
     [../]
+
+    [./ceo2_ysz]
+      type = MatchedValueBC
+      variable = phi_ysz
+      v = phi
+      boundary = ceo2_ysz
+    [../]
 			     
     [./ysz_au]
       type = NeumannBC
@@ -303,24 +383,24 @@
 
   []
 
-  [Bounds]
-    [./u_bounds]
-      type = BoundsAux
-      variable = bounds_dummy
-      bounded_variable = u
-      upper = 0.99
-      lower = 0.01
-      block = 0
-    [../]
-    [./v_bound]
-      type = BoundsAux
-      variable = bounds_dummy
-      bounded_variable = v
-      upper = 0.99
-      lower = 0.01
-      block = 0
-    [../]
-  []
+#  [Bounds]
+#    [./u_bounds]
+#      type = BoundsAux
+#      variable = bounds_dummy
+#      bounded_variable = u
+#      upper = 0.99
+#      lower = 0.01
+#      block = 0
+#    [../]
+#    [./v_bound]
+#      type = BoundsAux
+#      variable = bounds_dummy
+#      bounded_variable = v
+#      upper = 0.99
+#      lower = 0.01
+#      block = 0
+#    [../]
+#  []
 
 
   [Postprocessors]
@@ -353,16 +433,16 @@
 [VectorPostprocessors]
   [./line_x]
     type = LineValueSampler
-    start_point = '4.47e-3 0.2e-3 0'
-    end_point = '4.51e-3 0.2e-3 0'
+    start_point = '4.47e-5 5e-6 0'
+    end_point = '4.51e-5 5e-6 0'
     num_points = 256
     variable = 'u v phi'
     sort_by = 'id'
   [../]
   [./line_y]
     type = LineValueSampler
-    start_point = '5e-3 200000e-9 0'
-    end_point = '5e-3 199995e-9 0'
+    start_point = '5e-5 5e-6 0'
+    end_point = '5e-5 4.995e-6 0'
     num_points = 256
     variable = 'u v phi'
     sort_by = 'id'

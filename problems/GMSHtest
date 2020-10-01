@@ -1,0 +1,1093 @@
+Running command: mpiexec -n 2 /home/alejandro/projects/elephant/elephant-opt Outputs/csv=true --n-threads=2 --allow-test-objects -i peacock_run_exe_tmp_MeshInputTest.i
+Working directory: /home/alejandro/projects/elephant/problems
+
+
+
+*** Warning, This code is deprecated and will be removed in future versions!
+
+use registerAll instead of registerObjects
+
+
+
+
+*** Warning, This code is deprecated and will be removed in future versions!
+
+use ModulesApp::registerAll instead of ModulesApp::registerObjects
+
+
+
+
+
+
+*** Warning, This code is deprecated and will be removed in future versions!
+
+use registerAll instead of registerExecFlags
+
+
+Framework Information:
+MOOSE Version:           git commit 6a169f1 on 2019-05-31
+LibMesh Version:         816f832eb1d17eda3b4c2ff46b181e7321679e40
+PETSc Version:           3.7.6
+Current Time:            Thu Aug 27 21:37:14 2020
+Executable Timestamp:    Fri Jun 26 04:32:03 2020
+
+Parallelism:
+  Num Processors:          2
+  Num Threads:             2
+
+Mesh:
+  Parallel Type:           replicated
+  Mesh Dimension:          2
+  Spatial Dimension:       2
+  Nodes:
+    Total:                 1344920
+    Local:                 671604
+  Elems:
+    Total:                 1329813
+    Local:                 664907
+  Num Subdomains:          1
+  Num Partitions:          2
+  Partitioner:             metis
+
+Nonlinear System:
+  Num DOFs:                6724600
+  Num Local DOFs:          3358020
+  Variables:               { "q" "v" "phi" "muq" "muv" }
+  Finite Element Types:    "LAGRANGE"
+  Approximation Orders:    "FIRST"
+
+Auxiliary System:
+  Num DOFs:                2659626
+  Num Local DOFs:          1329814
+  Variables:               { "error" "errorfrac" }
+  Finite Element Types:    "MONOMIAL"
+  Approximation Orders:    "CONSTANT"
+
+Relationship Managers:
+  Algebraic:               ElementSideNeighborLayers (1 layer) for Adaptivity
+
+Execution Information:
+  Executioner:             Transient
+  TimeStepper:             ConstantDT
+  Solver Mode:             NEWTON
+  MOOSE Preconditioner:    SMP
+
+
+
+*** Warning ***
+/home/alejandro/projects/elephant/problems/peacock_run_exe_tmp_MeshInputTest.i:45: unused parameter 'GlobalParams/V'
+/home/alejandro/projects/elephant/problems/peacock_run_exe_tmp_MeshInputTest.i:57: unused parameter 'GlobalParams/fqy'
+/home/alejandro/projects/elephant/problems/peacock_run_exe_tmp_MeshInputTest.i:58: unused parameter 'GlobalParams/fyv'
+/home/alejandro/projects/elephant/problems/peacock_run_exe_tmp_MeshInputTest.i:62: unused parameter 'GlobalParams/Pco'
+/home/alejandro/projects/elephant/problems/peacock_run_exe_tmp_MeshInputTest.i:63: unused parameter 'GlobalParams/Pco2'
+/home/alejandro/projects/elephant/problems/peacock_run_exe_tmp_MeshInputTest.i:66: unused parameter 'GlobalParams/eta1'
+/home/alejandro/projects/elephant/problems/peacock_run_exe_tmp_MeshInputTest.i:67: unused parameter 'GlobalParams/eta2'
+/home/alejandro/projects/elephant/problems/peacock_run_exe_tmp_MeshInputTest.i:68: unused parameter 'GlobalParams/dHdd1'
+/home/alejandro/projects/elephant/problems/peacock_run_exe_tmp_MeshInputTest.i:69: unused parameter 'GlobalParams/dHdd2'
+/home/alejandro/projects/elephant/problems/peacock_run_exe_tmp_MeshInputTest.i:70: unused parameter 'GlobalParams/dS1'
+/home/alejandro/projects/elephant/problems/peacock_run_exe_tmp_MeshInputTest.i:71: unused parameter 'GlobalParams/dS2'
+/home/alejandro/projects/elephant/problems/peacock_run_exe_tmp_MeshInputTest.i:72: unused parameter 'GlobalParams/dH1'
+/home/alejandro/projects/elephant/problems/peacock_run_exe_tmp_MeshInputTest.i:73: unused parameter 'GlobalParams/dH2'
+
+Time Step 0, time = 0
+Time Step 1, time = 0.1, dt = 0.1
+WARNING: At least one element took more than 10 iterations to converge in inverse_map()...
+Rerun in devel/dbg mode for more details.
+ERROR: Newton scheme FAILED to converge in 21 iterations in element 1314848 for physical point = (x,y,z)=(0.00350664, 0.0020004,        0)
+  Elem Information
+   id()=1314848, unique_id()=2689980, processor_id()=0
+   type()=QUAD4
+   dim()=2
+   n_nodes()=4
+    0  Node id()=1314955, processor_id()=0, Point=(x,y,z)=(0.0035066, 0.0020004,        0)
+    DoFs=(0/0/3292365) (0/1/3292366) (0/2/3292367) (0/3/3292368) (0/4/3292369)
+    1  Node id()=1329954, processor_id()=0, Point=(x,y,z)=(0.0035066, 0.0020004,        0)
+    DoFs=(0/0/3325275) (0/1/3325276) (0/2/3325277) (0/3/3325278) (0/4/3325279)
+    2  Node id()=1329955, processor_id()=0, Point=(x,y,z)=(0.0035068, 0.0020004,        0)
+    DoFs=(0/0/3325280) (0/1/3325281) (0/2/3325282) (0/3/3325283) (0/4/3325284)
+    3  Node id()=1314956, processor_id()=0, Point=(x,y,z)=(0.0035068, 0.0020004,        0)
+    DoFs=(0/0/3292370) (0/1/3292371) (0/2/3292372) (0/3/3292373) (0/4/3292374)
+   n_sides()=4
+    neighbor(0)=1314847
+    neighbor(1)=nullptr
+    neighbor(2)=1314849
+    neighbor(3)=1299850
+   hmin()=1.35092e-15, hmax()=2.0004e-07
+   volume()=2.70237e-22
+   active()=1, ancestor()=0, subactive()=0, has_children()=0
+   parent()=nullptr
+   level()=0, p_level()=0
+   refinement_flag()=DO_NOTHING
+   p_refinement_flag()=DO_NOTHING
+   DoFs=(1/0/1316718) (1/1/1316719)
+Exiting...
+[0] /home/alejandro/projects/moose/scripts/../libmesh/src/fe/fe_map.C, line 1905, compiled Jun  2 2019 at 20:20:16
+WARNING: At least one element took more than 10 iterations to converge in inverse_map()...
+Rerun in devel/dbg mode for more details.
+ERROR: Newton scheme FAILED to converge in 21 iterations in element 1321397 for physical point = (x,y,z)=(0.00481679, 0.0020004,        0)
+  Elem Information
+   id()=1321397, unique_id()=2696529, processor_id()=1
+   type()=QUAD4
+   dim()=2
+   n_nodes()=4
+    0  Node id()=1321504, processor_id()=1, Point=(x,y,z)=(0.00481663, 0.0020004,        0)
+    DoFs=(0/0/6640430) (0/1/6640431) (0/2/6640432) (0/3/6640433) (0/4/6640434)
+    1  Node id()=1336503, processor_id()=1, Point=(x,y,z)=(0.00481663, 0.0020004,        0)
+    DoFs=(0/0/6682515) (0/1/6682516) (0/2/6682517) (0/3/6682518) (0/4/6682519)
+    2  Node id()=1336504, processor_id()=1, Point=(x,y,z)=(0.00481683, 0.0020004,        0)
+    DoFs=(0/0/6682520) (0/1/6682521) (0/2/6682522) (0/3/6682523) (0/4/6682524)
+    3  Node id()=1321505, processor_id()=1, Point=(x,y,z)=(0.00481683, 0.0020004,        0)
+    DoFs=(0/0/6640435) (0/1/6640436) (0/2/6640437) (0/3/6640438) (0/4/6640439)
+   n_sides()=4
+    neighbor(0)=1321396
+    neighbor(1)=nullptr
+    neighbor(2)=1321398
+    neighbor(3)=1306399
+   hmin()=1.35092e-15, hmax()=2.0002e-07
+   volume()=2.70297e-22
+   active()=1, ancestor()=0, subactive()=0, has_children()=0
+   parent()=nullptr
+   level()=0, p_level()=0
+   refinement_flag()=DO_NOTHING
+   p_refinement_flag()=DO_NOTHING
+   DoFs=(1/0/2642794) (1/1/2642795)
+Exiting...
+[1] /home/alejandro/projects/moose/scripts/../libmesh/src/fe/fe_map.C, line 1905, compiled Jun  2 2019 at 20:20:16
+We caught a libMesh error
+
+
+ERROR: Newton scheme FAILED to converge in 21 iterations in element 1321397 for physical point = (x,y,z)=(0.00481679, 0.0020004,        0)
+  Elem Information
+   id()=1321397, unique_id()=2696529, processor_id()=1
+   type()=QUAD4
+   dim()=2
+   n_nodes()=4
+    0  Node id()=1321504, processor_id()=1, Point=(x,y,z)=(0.00481663, 0.0020004,        0)
+    DoFs=(0/0/6640430) (0/1/6640431) (0/2/6640432) (0/3/6640433) (0/4/6640434)
+    1  Node id()=1336503, processor_id()=1, Point=(x,y,z)=(0.00481663, 0.0020004,        0)
+    DoFs=(0/0/6682515) (0/1/6682516) (0/2/6682517) (0/3/6682518) (0/4/6682519)
+    2  Node id()=1336504, processor_id()=1, Point=(x,y,z)=(0.00481683, 0.0020004,        0)
+    DoFs=(0/0/6682520) (0/1/6682521) (0/2/6682522) (0/3/6682523) (0/4/6682524)
+    3  Node id()=1321505, processor_id()=1, Point=(x,y,z)=(0.00481683, 0.0020004,        0)
+    DoFs=(0/0/6640435) (0/1/6640436) (0/2/6640437) (0/3/6640438) (0/4/6640439)
+   n_sides()=4
+    neighbor(0)=1321396
+    neighbor(1)=nullptr
+    neighbor(2)=1321398
+    neighbor(3)=1306399
+   hmin()=1.35092e-15, hmax()=2.0002e-07
+   volume()=2.70297e-22
+   active()=1, ancestor()=0, subactive()=0, has_children()=0
+   parent()=nullptr
+   level()=0, p_level()=0
+   refinement_flag()=DO_NOTHING
+   p_refinement_flag()=DO_NOTHING
+   DoFs=(1/0/2642794) (1/1/2642795)
+Exiting...
+[1] /home/alejandro/projects/moose/scripts/../libmesh/src/fe/fe_map.C, line 1905, compiled Jun  2 2019 at 20:20:16
+
+
+ERROR: Newton scheme FAILED to converge in 21 iterations in element 1314848 for physical point = (x,y,z)=(0.00350664, 0.0020004,        0)
+  Elem Information
+   id()=1314848, unique_id()=2689980, processor_id()=0
+   type()=QUAD4
+   dim()=2
+   n_nodes()=4
+    0  Node id()=1314955, processor_id()=0, Point=(x,y,z)=(0.0035066, 0.0020004,        0)
+    DoFs=(0/0/3292365) (0/1/3292366) (0/2/3292367) (0/3/3292368) (0/4/3292369)
+    1  Node id()=1329954, processor_id()=0, Point=(x,y,z)=(0.0035066, 0.0020004,        0)
+    DoFs=(0/0/3325275) (0/1/3325276) (0/2/3325277) (0/3/3325278) (0/4/3325279)
+    2  Node id()=1329955, processor_id()=0, Point=(x,y,z)=(0.0035068, 0.0020004,        0)
+    DoFs=(0/0/3325280) (0/1/3325281) (0/2/3325282) (0/3/3325283) (0/4/3325284)
+    3  Node id()=1314956, processor_id()=0, Point=(x,y,z)=(0.0035068, 0.0020004,        0)
+    DoFs=(0/0/3292370) (0/1/3292371) (0/2/3292372) (0/3/3292373) (0/4/3292374)
+   n_sides()=4
+    neighbor(0)=1314847
+    neighbor(1)=nullptr
+    neighbor(2)=1314849
+    neighbor(3)=1299850
+   hmin()=1.35092e-15, hmax()=2.0004e-07
+   volume()=2.70237e-22
+   active()=1, ancestor()=0, subactive()=0, has_children()=0
+   parent()=nullptr
+   level()=0, p_level()=0
+   refinement_flag()=DO_NOTHING
+   p_refinement_flag()=DO_NOTHING
+   DoFs=(1/0/1316718) (1/1/1316719)
+Exiting...
+[0] /home/alejandro/projects/moose/scripts/../libmesh/src/fe/fe_map.C, line 1905, compiled Jun  2 2019 at 20:20:16
+We caught a libMesh error
+Nonlinear solve did not converge due to DIVERGED_FUNCTION_DOMAIN iterations 0
+ Solve Did NOT Converge!
+Time Step 1, time = 0.05, dt = 0.05
+
+ERROR: Newton scheme FAILED to converge in 21 iterations in element 1321397 for physical point = (x,y,z)=(0.00481679, 0.0020004,        0)
+  Elem Information
+   id()=1321397, unique_id()=2696529, processor_id()=1
+   type()=QUAD4
+   dim()=2
+   n_nodes()=4
+    0  Node id()=1321504, processor_id()=1, Point=(x,y,z)=(0.00481663, 0.0020004,        0)
+    DoFs=(0/0/6640430) (0/1/6640431) (0/2/6640432) (0/3/6640433) (0/4/6640434)
+    1  Node id()=1336503, processor_id()=1, Point=(x,y,z)=(0.00481663, 0.0020004,        0)
+    DoFs=(0/0/6682515) (0/1/6682516) (0/2/6682517) (0/3/6682518) (0/4/6682519)
+    2  Node id()=1336504, processor_id()=1, Point=(x,y,z)=(0.00481683, 0.0020004,        0)
+    DoFs=(0/0/6682520) (0/1/6682521) (0/2/6682522) (0/3/6682523) (0/4/6682524)
+    3  Node id()=1321505, processor_id()=1, Point=(x,y,z)=(0.00481683, 0.0020004,        0)
+    DoFs=(0/0/6640435) (0/1/6640436) (0/2/6640437) (0/3/6640438) (0/4/6640439)
+   n_sides()=4
+    neighbor(0)=1321396
+    neighbor(1)=nullptr
+    neighbor(2)=1321398
+    neighbor(3)=1306399
+   hmin()=1.35092e-15, hmax()=2.0002e-07
+   volume()=2.70297e-22
+   active()=1, ancestor()=0, subactive()=0, has_children()=0
+   parent()=nullptr
+   level()=0, p_level()=0
+   refinement_flag()=DO_NOTHING
+   p_refinement_flag()=DO_NOTHING
+   DoFs=(1/0/2642794) (1/1/2642795)
+Exiting...
+[1] /home/alejandro/projects/moose/scripts/../libmesh/src/fe/fe_map.C, line 1905, compiled Jun  2 2019 at 20:20:16
+
+
+ERROR: Newton scheme FAILED to converge in 21 iterations in element 1314848 for physical point = (x,y,z)=(0.00350664, 0.0020004,        0)
+  Elem Information
+   id()=1314848, unique_id()=2689980, processor_id()=0
+   type()=QUAD4
+   dim()=2
+   n_nodes()=4
+    0  Node id()=1314955, processor_id()=0, Point=(x,y,z)=(0.0035066, 0.0020004,        0)
+    DoFs=(0/0/3292365) (0/1/3292366) (0/2/3292367) (0/3/3292368) (0/4/3292369)
+    1  Node id()=1329954, processor_id()=0, Point=(x,y,z)=(0.0035066, 0.0020004,        0)
+    DoFs=(0/0/3325275) (0/1/3325276) (0/2/3325277) (0/3/3325278) (0/4/3325279)
+    2  Node id()=1329955, processor_id()=0, Point=(x,y,z)=(0.0035068, 0.0020004,        0)
+    DoFs=(0/0/3325280) (0/1/3325281) (0/2/3325282) (0/3/3325283) (0/4/3325284)
+    3  Node id()=1314956, processor_id()=0, Point=(x,y,z)=(0.0035068, 0.0020004,        0)
+    DoFs=(0/0/3292370) (0/1/3292371) (0/2/3292372) (0/3/3292373) (0/4/3292374)
+   n_sides()=4
+    neighbor(0)=1314847
+    neighbor(1)=nullptr
+    neighbor(2)=1314849
+    neighbor(3)=1299850
+   hmin()=1.35092e-15, hmax()=2.0004e-07
+   volume()=2.70237e-22
+   active()=1, ancestor()=0, subactive()=0, has_children()=0
+   parent()=nullptr
+   level()=0, p_level()=0
+   refinement_flag()=DO_NOTHING
+   p_refinement_flag()=DO_NOTHING
+   DoFs=(1/0/1316718) (1/1/1316719)
+Exiting...
+[0] /home/alejandro/projects/moose/scripts/../libmesh/src/fe/fe_map.C, line 1905, compiled Jun  2 2019 at 20:20:16
+We caught a libMesh error
+
+ERROR: Newton scheme FAILED to converge in 21 iterations in element 1321397 for physical point = (x,y,z)=(0.00481679, 0.0020004,        0)
+  Elem Information
+   id()=1321397, unique_id()=2696529, processor_id()=1
+   type()=QUAD4
+   dim()=2
+   n_nodes()=4
+    0  Node id()=1321504, processor_id()=1, Point=(x,y,z)=(0.00481663, 0.0020004,        0)
+    DoFs=(0/0/6640430) (0/1/6640431) (0/2/6640432) (0/3/6640433) (0/4/6640434)
+    1  Node id()=1336503, processor_id()=1, Point=(x,y,z)=(0.00481663, 0.0020004,        0)
+    DoFs=(0/0/6682515) (0/1/6682516) (0/2/6682517) (0/3/6682518) (0/4/6682519)
+    2  Node id()=1336504, processor_id()=1, Point=(x,y,z)=(0.00481683, 0.0020004,        0)
+    DoFs=(0/0/6682520) (0/1/6682521) (0/2/6682522) (0/3/6682523) (0/4/6682524)
+    3  Node id()=1321505, processor_id()=1, Point=(x,y,z)=(0.00481683, 0.0020004,        0)
+    DoFs=(0/0/6640435) (0/1/6640436) (0/2/6640437) (0/3/6640438) (0/4/6640439)
+   n_sides()=4
+    neighbor(0)=1321396
+    neighbor(1)=nullptr
+    neighbor(2)=1321398
+    neighbor(3)=1306399
+   hmin()=1.35092e-15, hmax()=2.0002e-07
+   volume()=2.70297e-22
+   active()=1, ancestor()=0, subactive()=0, has_children()=0
+   parent()=nullptr
+   level()=0, p_level()=0
+   refinement_flag()=DO_NOTHING
+   p_refinement_flag()=DO_NOTHING
+   DoFs=(1/0/2642794) (1/1/2642795)
+Exiting...
+[1] /home/alejandro/projects/moose/scripts/../libmesh/src/fe/fe_map.C, line 1905, compiled Jun  2 2019 at 20:20:16
+ERROR: Newton scheme FAILED to converge in 21 iterations in element 1314848 for physical point = (x,y,z)=(0.00350664, 0.0020004,        0)
+  Elem Information
+   id()=1314848, unique_id()=2689980, processor_id()=0
+   type()=QUAD4
+   dim()=2
+   n_nodes()=4
+    0  Node id()=1314955, processor_id()=0, Point=(x,y,z)=(0.0035066, 0.0020004,        0)
+    DoFs=(0/0/3292365) (0/1/3292366) (0/2/3292367) (0/3/3292368) (0/4/3292369)
+    1  Node id()=1329954, processor_id()=0, Point=(x,y,z)=(0.0035066, 0.0020004,        0)
+    DoFs=(0/0/3325275) (0/1/3325276) (0/2/3325277) (0/3/3325278) (0/4/3325279)
+    2  Node id()=1329955, processor_id()=0, Point=(x,y,z)=(0.0035068, 0.0020004,        0)
+    DoFs=(0/0/3325280) (0/1/3325281) (0/2/3325282) (0/3/3325283) (0/4/3325284)
+    3  Node id()=1314956, processor_id()=0, Point=(x,y,z)=(0.0035068, 0.0020004,        0)
+    DoFs=(0/0/3292370) (0/1/3292371) (0/2/3292372) (0/3/3292373) (0/4/3292374)
+   n_sides()=4
+    neighbor(0)=1314847
+    neighbor(1)=nullptr
+    neighbor(2)=1314849
+    neighbor(3)=1299850
+   hmin()=1.35092e-15, hmax()=2.0004e-07
+   volume()=2.70237e-22
+   active()=1, ancestor()=0, subactive()=0, has_children()=0
+   parent()=nullptr
+   level()=0, p_level()=0
+   refinement_flag()=DO_NOTHING
+   p_refinement_flag()=DO_NOTHING
+   DoFs=(1/0/1316718) (1/1/1316719)
+Exiting...
+[0] /home/alejandro/projects/moose/scripts/../libmesh/src/fe/fe_map.C, line 1905, compiled Jun  2 2019 at 20:20:16
+We caught a libMesh error
+Nonlinear solve did not converge due to DIVERGED_FUNCTION_DOMAIN iterations 0
+ Solve Did NOT Converge!
+Time Step 1, time = 0.025, dt = 0.025
+
+
+
+
+
+
+
+
+ERROR: Newton scheme FAILED to converge in 21 iterations in element 1314848 for physical point = (x,y,z)=(0.00350664, 0.0020004,        0)
+  Elem Information
+   id()=1314848, unique_id()=2689980, processor_id()=0
+   type()=QUAD4
+   dim()=2
+   n_nodes()=4
+    0  Node id()=1314955, processor_id()=0, Point=(x,y,z)=(0.0035066, 0.0020004,        0)
+    DoFs=(0/0/3292365) (0/1/3292366) (0/2/3292367) (0/3/3292368) (0/4/3292369)
+    1  Node id()=1329954, processor_id()=0, Point=(x,y,z)=(0.0035066, 0.0020004,        0)
+    DoFs=(0/0/3325275) (0/1/3325276) (0/2/3325277) (0/3/3325278) (0/4/3325279)
+    2  Node id()=1329955, processor_id()=0, Point=(x,y,z)=(0.0035068, 0.0020004,        0)
+    DoFs=(0/0/3325280) (0/1/3325281) (0/2/3325282) (0/3/3325283) (0/4/3325284)
+    3  Node id()=1314956, processor_id()=0, Point=(x,y,z)=(0.0035068, 0.0020004,        0)
+    DoFs=(0/0/3292370) (0/1/3292371) (0/2/3292372) (0/3/3292373) (0/4/3292374)
+   n_sides()=4
+    neighbor(0)=1314847
+    neighbor(1)=nullptr
+    neighbor(2)=1314849
+    neighbor(3)=1299850
+   hmin()=1.35092e-15, hmax()=2.0004e-07
+   volume()=2.70237e-22
+   active()=1, ancestor()=0, subactive()=0, has_children()=0
+   parent()=nullptr
+   level()=0, p_level()=0
+   refinement_flag()=DO_NOTHING
+   p_refinement_flag()=DO_NOTHING
+   DoFs=(1/0/1316718) (1/1/1316719)
+Exiting...
+[0] /home/alejandro/projects/moose/scripts/../libmesh/src/fe/fe_map.C, line 1905, compiled Jun  2 2019 at 20:20:16
+ERROR: Newton scheme FAILED to converge in 21 iterations in element 1321397 for physical point = (x,y,z)=(0.00481679, 0.0020004,        0)
+  Elem Information
+   id()=1321397, unique_id()=2696529, processor_id()=1
+   type()=QUAD4
+   dim()=2
+   n_nodes()=4
+    0  Node id()=1321504, processor_id()=1, Point=(x,y,z)=(0.00481663, 0.0020004,        0)
+    DoFs=(0/0/6640430) (0/1/6640431) (0/2/6640432) (0/3/6640433) (0/4/6640434)
+    1  Node id()=1336503, processor_id()=1, Point=(x,y,z)=(0.00481663, 0.0020004,        0)
+    DoFs=(0/0/6682515) (0/1/6682516) (0/2/6682517) (0/3/6682518) (0/4/6682519)
+    2  Node id()=1336504, processor_id()=1, Point=(x,y,z)=(0.00481683, 0.0020004,        0)
+    DoFs=(0/0/6682520) (0/1/6682521) (0/2/6682522) (0/3/6682523) (0/4/6682524)
+    3  Node id()=1321505, processor_id()=1, Point=(x,y,z)=(0.00481683, 0.0020004,        0)
+    DoFs=(0/0/6640435) (0/1/6640436) (0/2/6640437) (0/3/6640438) (0/4/6640439)
+   n_sides()=4
+    neighbor(0)=1321396
+    neighbor(1)=nullptr
+    neighbor(2)=1321398
+    neighbor(3)=1306399
+   hmin()=1.35092e-15, hmax()=2.0002e-07
+   volume()=2.70297e-22
+   active()=1, ancestor()=0, subactive()=0, has_children()=0
+   parent()=nullptr
+   level()=0, p_level()=0
+   refinement_flag()=DO_NOTHING
+   p_refinement_flag()=DO_NOTHING
+   DoFs=(1/0/2642794) (1/1/2642795)
+Exiting...
+[1] /home/alejandro/projects/moose/scripts/../libmesh/src/fe/fe_map.C, line 1905, compiled Jun  2 2019 at 20:20:16
+We caught a libMesh error
+
+
+
+
+
+
+
+
+
+
+
+ERROR: Newton scheme FAILED to converge in 21 iterations in element 1314848 for physical point = (x,y,z)=(0.00350664, 0.0020004,        0)
+  Elem Information
+   id()=1314848, unique_id()=2689980, processor_id()=0
+   type()=QUAD4
+   dim()=2
+   n_nodes()=4
+    0  Node id()=1314955, processor_id()=0, Point=(x,y,z)=(0.0035066, 0.0020004,        0)
+    DoFs=(0/0/3292365) (0/1/3292366) (0/2/3292367) (0/3/3292368) (0/4/3292369)
+    1  Node id()=1329954, processor_id()=0, Point=(x,y,z)=(0.0035066, 0.0020004,        0)
+    DoFs=(0/0/3325275) (0/1/3325276) (0/2/3325277) (0/3/3325278) (0/4/3325279)
+    2  Node id()=1329955, processor_id()=0, Point=(x,y,z)=(0.0035068, 0.0020004,        0)
+    DoFs=(0/0/3325280) (0/1/3325281) (0/2/3325282) (0/3/3325283) (0/4/3325284)
+    3  Node id()=1314956, processor_id()=0, Point=(x,y,z)=(0.0035068, 0.0020004,        0)
+    DoFs=(0/0/3292370) (0/1/3292371) (0/2/3292372) (0/3/3292373) (0/4/3292374)
+   n_sides()=4
+    neighbor(0)=1314847
+    neighbor(1)=nullptr
+    neighbor(2)=1314849
+    neighbor(3)=1299850
+   hmin()=1.35092e-15, hmax()=2.0004e-07
+   volume()=2.70237e-22
+   active()=1, ancestor()=0, subactive()=0, has_children()=0
+   parent()=nullptr
+   level()=0, p_level()=0
+   refinement_flag()=DO_NOTHING
+   p_refinement_flag()=DO_NOTHING
+   DoFs=(1/0/1316718) (1/1/1316719)
+Exiting...
+[0] /home/alejandro/projects/moose/scripts/../libmesh/src/fe/fe_map.C, line 1905, compiled Jun  2 2019 at 20:20:16
+ERROR: Newton scheme FAILED to converge in 21 iterations in element 1321397 for physical point = (x,y,z)=(0.00481679, 0.0020004,        0)
+  Elem Information
+   id()=1321397, unique_id()=2696529, processor_id()=1
+   type()=QUAD4
+   dim()=2
+   n_nodes()=4
+    0  Node id()=1321504, processor_id()=1, Point=(x,y,z)=(0.00481663, 0.0020004,        0)
+    DoFs=(0/0/6640430) (0/1/6640431) (0/2/6640432) (0/3/6640433) (0/4/6640434)
+    1  Node id()=1336503, processor_id()=1, Point=(x,y,z)=(0.00481663, 0.0020004,        0)
+    DoFs=(0/0/6682515) (0/1/6682516) (0/2/6682517) (0/3/6682518) (0/4/6682519)
+    2  Node id()=1336504, processor_id()=1, Point=(x,y,z)=(0.00481683, 0.0020004,        0)
+    DoFs=(0/0/6682520) (0/1/6682521) (0/2/6682522) (0/3/6682523) (0/4/6682524)
+    3  Node id()=1321505, processor_id()=1, Point=(x,y,z)=(0.00481683, 0.0020004,        0)
+    DoFs=(0/0/6640435) (0/1/6640436) (0/2/6640437) (0/3/6640438) (0/4/6640439)
+   n_sides()=4
+    neighbor(0)=1321396
+    neighbor(1)=nullptr
+    neighbor(2)=1321398
+    neighbor(3)=1306399
+   hmin()=1.35092e-15, hmax()=2.0002e-07
+   volume()=2.70297e-22
+   active()=1, ancestor()=0, subactive()=0, has_children()=0
+   parent()=nullptr
+   level()=0, p_level()=0
+   refinement_flag()=DO_NOTHING
+   p_refinement_flag()=DO_NOTHING
+   DoFs=(1/0/2642794) (1/1/2642795)
+Exiting...
+[1] /home/alejandro/projects/moose/scripts/../libmesh/src/fe/fe_map.C, line 1905, compiled Jun  2 2019 at 20:20:16
+We caught a libMesh error
+Nonlinear solve did not converge due to DIVERGED_FUNCTION_DOMAIN iterations 0
+ Solve Did NOT Converge!
+Time Step 1, time = 0.0125, dt = 0.0125
+
+
+
+
+
+
+
+
+
+ERROR: Newton scheme FAILED to converge in 21 iterations in element 1321397 for physical point = (x,y,z)=(0.00481679, 0.0020004,        0)
+  Elem Information
+   id()=1321397, unique_id()=2696529, processor_id()=1
+   type()=QUAD4
+   dim()=2
+   n_nodes()=4
+    0  Node id()=1321504, processor_id()=1, Point=(x,y,z)=(0.00481663, 0.0020004,        0)
+    DoFs=(0/0/6640430) (0/1/6640431) (0/2/6640432) (0/3/6640433) (0/4/6640434)
+    1  Node id()=1336503, processor_id()=1, Point=(x,y,z)=(0.00481663, 0.0020004,        0)
+    DoFs=(0/0/6682515) (0/1/6682516) (0/2/6682517) (0/3/6682518) (0/4/6682519)
+    2  Node id()=1336504, processor_id()=1, Point=(x,y,z)=(0.00481683, 0.0020004,        0)
+    DoFs=(0/0/6682520) (0/1/6682521) (0/2/6682522) (0/3/6682523) (0/4/6682524)
+    3  Node id()=1321505, processor_id()=1, Point=(x,y,z)=(0.00481683, 0.0020004,        0)
+    DoFs=(0/0/6640435) (0/1/6640436) (0/2/6640437) (0/3/6640438) (0/4/6640439)
+   n_sides()=4
+    neighbor(0)=1321396
+    neighbor(1)=nullptr
+    neighbor(2)=1321398
+    neighbor(3)=1306399
+   hmin()=1.35092e-15, hmax()=2.0002e-07
+   volume()=2.70297e-22
+   active()=1, ancestor()=0, subactive()=0, has_children()=0
+   parent()=nullptr
+   level()=0, p_level()=0
+   refinement_flag()=DO_NOTHING
+   p_refinement_flag()=DO_NOTHING
+   DoFs=(1/0/2642794) (1/1/2642795)
+Exiting...
+[1] /home/alejandro/projects/moose/scripts/../libmesh/src/fe/fe_map.C, line 1905, compiled Jun  2 2019 at 20:20:16
+ERROR: Newton scheme FAILED to converge in 21 iterations in element 1314848 for physical point = (x,y,z)=(0.00350664, 0.0020004,        0)
+  Elem Information
+   id()=1314848, unique_id()=2689980, processor_id()=0
+   type()=QUAD4
+   dim()=2
+   n_nodes()=4
+    0  Node id()=1314955, processor_id()=0, Point=(x,y,z)=(0.0035066, 0.0020004,        0)
+    DoFs=(0/0/3292365) (0/1/3292366) (0/2/3292367) (0/3/3292368) (0/4/3292369)
+    1  Node id()=1329954, processor_id()=0, Point=(x,y,z)=(0.0035066, 0.0020004,        0)
+    DoFs=(0/0/3325275) (0/1/3325276) (0/2/3325277) (0/3/3325278) (0/4/3325279)
+    2  Node id()=1329955, processor_id()=0, Point=(x,y,z)=(0.0035068, 0.0020004,        0)
+    DoFs=(0/0/3325280) (0/1/3325281) (0/2/3325282) (0/3/3325283) (0/4/3325284)
+    3  Node id()=1314956, processor_id()=0, Point=(x,y,z)=(0.0035068, 0.0020004,        0)
+    DoFs=(0/0/3292370) (0/1/3292371) (0/2/3292372) (0/3/3292373) (0/4/3292374)
+   n_sides()=4
+    neighbor(0)=1314847
+    neighbor(1)=nullptr
+    neighbor(2)=1314849
+    neighbor(3)=1299850
+   hmin()=1.35092e-15, hmax()=2.0004e-07
+   volume()=2.70237e-22
+   active()=1, ancestor()=0, subactive()=0, has_children()=0
+   parent()=nullptr
+   level()=0, p_level()=0
+   refinement_flag()=DO_NOTHING
+   p_refinement_flag()=DO_NOTHING
+   DoFs=(1/0/1316718) (1/1/1316719)
+Exiting...
+[0] /home/alejandro/projects/moose/scripts/../libmesh/src/fe/fe_map.C, line 1905, compiled Jun  2 2019 at 20:20:16
+We caught a libMesh error
+
+
+
+
+
+
+
+
+
+
+ERROR: Newton scheme FAILED to converge in 21 iterations in element 1321397 for physical point = (x,y,z)=(0.00481679, 0.0020004,        0)
+  Elem Information
+   id()=1321397, unique_id()=2696529, processor_id()=1
+   type()=QUAD4
+   dim()=2
+   n_nodes()=4
+    0  Node id()=1321504, processor_id()=1, Point=(x,y,z)=(0.00481663, 0.0020004,        0)
+    DoFs=(0/0/6640430) (0/1/6640431) (0/2/6640432) (0/3/6640433) (0/4/6640434)
+    1  Node id()=1336503, processor_id()=1, Point=(x,y,z)=(0.00481663, 0.0020004,        0)
+    DoFs=(0/0/6682515) (0/1/6682516) (0/2/6682517) (0/3/6682518) (0/4/6682519)
+    2  Node id()=1336504, processor_id()=1, Point=(x,y,z)=(0.00481683, 0.0020004,        0)
+    DoFs=(0/0/6682520) (0/1/6682521) (0/2/6682522) (0/3/6682523) (0/4/6682524)
+    3  Node id()=1321505, processor_id()=1, Point=(x,y,z)=(0.00481683, 0.0020004,        0)
+    DoFs=(0/0/6640435) (0/1/6640436) (0/2/6640437) (0/3/6640438) (0/4/6640439)
+   n_sides()=4
+    neighbor(0)=1321396
+    neighbor(1)=nullptr
+    neighbor(2)=1321398
+    neighbor(3)=1306399
+   hmin()=1.35092e-15, hmax()=2.0002e-07
+   volume()=2.70297e-22
+   active()=1, ancestor()=0, subactive()=0, has_children()=0
+   parent()=nullptr
+   level()=0, p_level()=0
+   refinement_flag()=DO_NOTHING
+   p_refinement_flag()=DO_NOTHING
+   DoFs=(1/0/2642794) (1/1/2642795)
+Exiting...
+[1] /home/alejandro/projects/moose/scripts/../libmesh/src/fe/fe_map.C, line 1905, compiled Jun  2 2019 at 20:20:16
+ERROR: Newton scheme FAILED to converge in 21 iterations in element 1314848 for physical point = (x,y,z)=(0.00350664, 0.0020004,        0)
+  Elem Information
+   id()=1314848, unique_id()=2689980, processor_id()=0
+   type()=QUAD4
+   dim()=2
+   n_nodes()=4
+    0  Node id()=1314955, processor_id()=0, Point=(x,y,z)=(0.0035066, 0.0020004,        0)
+    DoFs=(0/0/3292365) (0/1/3292366) (0/2/3292367) (0/3/3292368) (0/4/3292369)
+    1  Node id()=1329954, processor_id()=0, Point=(x,y,z)=(0.0035066, 0.0020004,        0)
+    DoFs=(0/0/3325275) (0/1/3325276) (0/2/3325277) (0/3/3325278) (0/4/3325279)
+    2  Node id()=1329955, processor_id()=0, Point=(x,y,z)=(0.0035068, 0.0020004,        0)
+    DoFs=(0/0/3325280) (0/1/3325281) (0/2/3325282) (0/3/3325283) (0/4/3325284)
+    3  Node id()=1314956, processor_id()=0, Point=(x,y,z)=(0.0035068, 0.0020004,        0)
+    DoFs=(0/0/3292370) (0/1/3292371) (0/2/3292372) (0/3/3292373) (0/4/3292374)
+   n_sides()=4
+    neighbor(0)=1314847
+    neighbor(1)=nullptr
+    neighbor(2)=1314849
+    neighbor(3)=1299850
+   hmin()=1.35092e-15, hmax()=2.0004e-07
+   volume()=2.70237e-22
+   active()=1, ancestor()=0, subactive()=0, has_children()=0
+   parent()=nullptr
+   level()=0, p_level()=0
+   refinement_flag()=DO_NOTHING
+   p_refinement_flag()=DO_NOTHING
+   DoFs=(1/0/1316718) (1/1/1316719)
+Exiting...
+[0] /home/alejandro/projects/moose/scripts/../libmesh/src/fe/fe_map.C, line 1905, compiled Jun  2 2019 at 20:20:16
+We caught a libMesh error
+Nonlinear solve did not converge due to DIVERGED_FUNCTION_DOMAIN iterations 0
+ Solve Did NOT Converge!
+Time Step 1, time = 0.00625, dt = 0.00625
+
+
+
+
+
+
+
+ERROR: Newton scheme FAILED to converge in 21 iterations in element 1314848 for physical point = (x,y,z)=(0.00350664, 0.0020004,        0)
+  Elem Information
+   id()=1314848, unique_id()=2689980, processor_id()=0
+   type()=QUAD4
+   dim()=2
+   n_nodes()=4
+    0  Node id()=1314955, processor_id()=0, Point=(x,y,z)=(0.0035066, 0.0020004,        0)
+    DoFs=(0/0/3292365) (0/1/3292366) (0/2/3292367) (0/3/3292368) (0/4/3292369)
+    1  Node id()=1329954, processor_id()=0, Point=(x,y,z)=(0.0035066, 0.0020004,        0)
+    DoFs=(0/0/3325275) (0/1/3325276) (0/2/3325277) (0/3/3325278) (0/4/3325279)
+    2  Node id()=1329955, processor_id()=0, Point=(x,y,z)=(0.0035068, 0.0020004,        0)
+    DoFs=(0/0/3325280) (0/1/3325281) (0/2/3325282) (0/3/3325283) (0/4/3325284)
+    3  Node id()=1314956, processor_id()=0, Point=(x,y,z)=(0.0035068, 0.0020004,        0)
+    DoFs=(0/0/3292370) (0/1/3292371) (0/2/3292372) (0/3/3292373) (0/4/3292374)
+   n_sides()=4
+    neighbor(0)=1314847
+    neighbor(1)=nullptr
+    neighbor(2)=1314849
+    neighbor(3)=1299850
+   hmin()=1.35092e-15, hmax()=2.0004e-07
+   volume()=2.70237e-22
+   active()=1, ancestor()=0, subactive()=0, has_children()=0
+   parent()=nullptr
+   level()=0, p_level()=0
+   refinement_flag()=DO_NOTHING
+   p_refinement_flag()=DO_NOTHING
+   DoFs=(1/0/1316718) (1/1/1316719)
+Exiting...
+[0] /home/alejandro/projects/moose/scripts/../libmesh/src/fe/fe_map.C, line 1905, compiled Jun  2 2019 at 20:20:16
+ERROR: Newton scheme FAILED to converge in 21 iterations in element 1321397 for physical point = (x,y,z)=(0.00481679, 0.0020004,        0)
+  Elem Information
+   id()=1321397, unique_id()=2696529, processor_id()=1
+   type()=QUAD4
+   dim()=2
+   n_nodes()=4
+    0  Node id()=1321504, processor_id()=1, Point=(x,y,z)=(0.00481663, 0.0020004,        0)
+    DoFs=(0/0/6640430) (0/1/6640431) (0/2/6640432) (0/3/6640433) (0/4/6640434)
+    1  Node id()=1336503, processor_id()=1, Point=(x,y,z)=(0.00481663, 0.0020004,        0)
+    DoFs=(0/0/6682515) (0/1/6682516) (0/2/6682517) (0/3/6682518) (0/4/6682519)
+    2  Node id()=1336504, processor_id()=1, Point=(x,y,z)=(0.00481683, 0.0020004,        0)
+    DoFs=(0/0/6682520) (0/1/6682521) (0/2/6682522) (0/3/6682523) (0/4/6682524)
+    3  Node id()=1321505, processor_id()=1, Point=(x,y,z)=(0.00481683, 0.0020004,        0)
+    DoFs=(0/0/6640435) (0/1/6640436) (0/2/6640437) (0/3/6640438) (0/4/6640439)
+   n_sides()=4
+    neighbor(0)=1321396
+    neighbor(1)=nullptr
+    neighbor(2)=1321398
+    neighbor(3)=1306399
+   hmin()=1.35092e-15, hmax()=2.0002e-07
+   volume()=2.70297e-22
+   active()=1, ancestor()=0, subactive()=0, has_children()=0
+   parent()=nullptr
+   level()=0, p_level()=0
+   refinement_flag()=DO_NOTHING
+   p_refinement_flag()=DO_NOTHING
+   DoFs=(1/0/2642794) (1/1/2642795)
+Exiting...
+[1] /home/alejandro/projects/moose/scripts/../libmesh/src/fe/fe_map.C, line 1905, compiled Jun  2 2019 at 20:20:16
+We caught a libMesh error
+ERROR: Newton scheme FAILED to converge in 21 iterations in element 1321397 for physical point = (x,y,z)=(0.00481679, 0.0020004,        0)
+  Elem Information
+   id()=1321397, unique_id()=2696529, processor_id()=1
+   type()=QUAD4
+   dim()=2
+   n_nodes()=4
+    0  Node id()=1321504, processor_id()=1, Point=(x,y,z)=(0.00481663, 0.0020004,        0)
+    DoFs=(0/0/6640430) (0/1/6640431) (0/2/6640432) (0/3/6640433) (0/4/6640434)
+    1  Node id()=1336503, processor_id()=1, Point=(x,y,z)=(0.00481663, 0.0020004,        0)
+    DoFs=(0/0/6682515) (0/1/6682516) (0/2/6682517) (0/3/6682518) (0/4/6682519)
+    2  Node id()=1336504, processor_id()=1, Point=(x,y,z)=(0.00481683, 0.0020004,        0)
+    DoFs=(0/0/6682520) (0/1/6682521) (0/2/6682522) (0/3/6682523) (0/4/6682524)
+    3  Node id()=1321505, processor_id()=1, Point=(x,y,z)=(0.00481683, 0.0020004,        0)
+    DoFs=(0/0/6640435) (0/1/6640436) (0/2/6640437) (0/3/6640438) (0/4/6640439)
+   n_sides()=4
+    neighbor(0)=1321396
+    neighbor(1)=nullptr
+    neighbor(2)=1321398
+    neighbor(3)=1306399
+   hmin()=1.35092e-15, hmax()=2.0002e-07
+   volume()=2.70297e-22
+   active()=1, ancestor()=0, subactive()=0, has_children()=0
+   parent()=nullptr
+   level()=0, p_level()=0
+   refinement_flag()=DO_NOTHING
+   p_refinement_flag()=DO_NOTHING
+   DoFs=(1/0/2642794) (1/1/2642795)
+Exiting...
+[1] /home/alejandro/projects/moose/scripts/../libmesh/src/fe/fe_map.C, line 1905, compiled Jun  2 2019 at 20:20:16
+ERROR: Newton scheme FAILED to converge in 21 iterations in element 1314848 for physical point = (x,y,z)=(0.00350664, 0.0020004,        0)
+  Elem Information
+   id()=1314848, unique_id()=2689980, processor_id()=0
+   type()=QUAD4
+   dim()=2
+   n_nodes()=4
+    0  Node id()=1314955, processor_id()=0, Point=(x,y,z)=(0.0035066, 0.0020004,        0)
+    DoFs=(0/0/3292365) (0/1/3292366) (0/2/3292367) (0/3/3292368) (0/4/3292369)
+    1  Node id()=1329954, processor_id()=0, Point=(x,y,z)=(0.0035066, 0.0020004,        0)
+    DoFs=(0/0/3325275) (0/1/3325276) (0/2/3325277) (0/3/3325278) (0/4/3325279)
+    2  Node id()=1329955, processor_id()=0, Point=(x,y,z)=(0.0035068, 0.0020004,        0)
+    DoFs=(0/0/3325280) (0/1/3325281) (0/2/3325282) (0/3/3325283) (0/4/3325284)
+    3  Node id()=1314956, processor_id()=0, Point=(x,y,z)=(0.0035068, 0.0020004,        0)
+    DoFs=(0/0/3292370) (0/1/3292371) (0/2/3292372) (0/3/3292373) (0/4/3292374)
+   n_sides()=4
+    neighbor(0)=1314847
+    neighbor(1)=nullptr
+    neighbor(2)=1314849
+    neighbor(3)=1299850
+   hmin()=1.35092e-15, hmax()=2.0004e-07
+   volume()=2.70237e-22
+   active()=1, ancestor()=0, subactive()=0, has_children()=0
+   parent()=nullptr
+   level()=0, p_level()=0
+   refinement_flag()=DO_NOTHING
+   p_refinement_flag()=DO_NOTHING
+   DoFs=(1/0/1316718) (1/1/1316719)
+Exiting...
+[0] /home/alejandro/projects/moose/scripts/../libmesh/src/fe/fe_map.C, line 1905, compiled Jun  2 2019 at 20:20:16
+We caught a libMesh error
+Nonlinear solve did not converge due to DIVERGED_FUNCTION_DOMAIN iterations 0
+ Solve Did NOT Converge!
+Time Step 1, time = 0.003125, dt = 0.003125
+
+ERROR: Newton scheme FAILED to converge in 21 iterations in element 1321397 for physical point = (x,y,z)=(0.00481679, 0.0020004,        0)
+  Elem Information
+   id()=1321397, unique_id()=2696529, processor_id()=1
+   type()=QUAD4
+   dim()=2
+   n_nodes()=4
+    0  Node id()=1321504, processor_id()=1, Point=(x,y,z)=(0.00481663, 0.0020004,        0)
+    DoFs=(0/0/6640430) (0/1/6640431) (0/2/6640432) (0/3/6640433) (0/4/6640434)
+    1  Node id()=1336503, processor_id()=1, Point=(x,y,z)=(0.00481663, 0.0020004,        0)
+    DoFs=(0/0/6682515) (0/1/6682516) (0/2/6682517) (0/3/6682518) (0/4/6682519)
+    2  Node id()=1336504, processor_id()=1, Point=(x,y,z)=(0.00481683, 0.0020004,        0)
+    DoFs=(0/0/6682520) (0/1/6682521) (0/2/6682522) (0/3/6682523) (0/4/6682524)
+    3  Node id()=1321505, processor_id()=1, Point=(x,y,z)=(0.00481683, 0.0020004,        0)
+    DoFs=(0/0/6640435) (0/1/6640436) (0/2/6640437) (0/3/6640438) (0/4/6640439)
+   n_sides()=4
+    neighbor(0)=1321396
+    neighbor(1)=nullptr
+    neighbor(2)=1321398
+    neighbor(3)=1306399
+   hmin()=1.35092e-15, hmax()=2.0002e-07
+   volume()=2.70297e-22
+   active()=1, ancestor()=0, subactive()=0, has_children()=0
+   parent()=nullptr
+   level()=0, p_level()=0
+   refinement_flag()=DO_NOTHING
+   p_refinement_flag()=DO_NOTHING
+   DoFs=(1/0/2642794) (1/1/2642795)
+Exiting...
+[1] /home/alejandro/projects/moose/scripts/../libmesh/src/fe/fe_map.C, line 1905, compiled Jun  2 2019 at 20:20:16
+ERROR: Newton scheme FAILED to converge in 21 iterations in element 1314848 for physical point = (x,y,z)=(0.00350664, 0.0020004,        0)
+  Elem Information
+   id()=1314848, unique_id()=2689980, processor_id()=0
+   type()=QUAD4
+   dim()=2
+   n_nodes()=4
+    0  Node id()=1314955, processor_id()=0, Point=(x,y,z)=(0.0035066, 0.0020004,        0)
+    DoFs=(0/0/3292365) (0/1/3292366) (0/2/3292367) (0/3/3292368) (0/4/3292369)
+    1  Node id()=1329954, processor_id()=0, Point=(x,y,z)=(0.0035066, 0.0020004,        0)
+    DoFs=(0/0/3325275) (0/1/3325276) (0/2/3325277) (0/3/3325278) (0/4/3325279)
+    2  Node id()=1329955, processor_id()=0, Point=(x,y,z)=(0.0035068, 0.0020004,        0)
+    DoFs=(0/0/3325280) (0/1/3325281) (0/2/3325282) (0/3/3325283) (0/4/3325284)
+    3  Node id()=1314956, processor_id()=0, Point=(x,y,z)=(0.0035068, 0.0020004,        0)
+    DoFs=(0/0/3292370) (0/1/3292371) (0/2/3292372) (0/3/3292373) (0/4/3292374)
+   n_sides()=4
+    neighbor(0)=1314847
+    neighbor(1)=nullptr
+    neighbor(2)=1314849
+    neighbor(3)=1299850
+   hmin()=1.35092e-15, hmax()=2.0004e-07
+   volume()=2.70237e-22
+   active()=1, ancestor()=0, subactive()=0, has_children()=0
+   parent()=nullptr
+   level()=0, p_level()=0
+   refinement_flag()=DO_NOTHING
+   p_refinement_flag()=DO_NOTHING
+   DoFs=(1/0/1316718) (1/1/1316719)
+Exiting...
+[0] /home/alejandro/projects/moose/scripts/../libmesh/src/fe/fe_map.C, line 1905, compiled Jun  2 2019 at 20:20:16
+We caught a libMesh error
+
+
+
+
+
+
+
+
+ERROR: Newton scheme FAILED to converge in 21 iterations in element 1321397 for physical point = (x,y,z)=(0.00481679, 0.0020004,        0)
+  Elem Information
+   id()=1321397, unique_id()=2696529, processor_id()=1
+   type()=QUAD4
+   dim()=2
+   n_nodes()=4
+    0  Node id()=1321504, processor_id()=1, Point=(x,y,z)=(0.00481663, 0.0020004,        0)
+    DoFs=(0/0/6640430) (0/1/6640431) (0/2/6640432) (0/3/6640433) (0/4/6640434)
+    1  Node id()=1336503, processor_id()=1, Point=(x,y,z)=(0.00481663, 0.0020004,        0)
+    DoFs=(0/0/6682515) (0/1/6682516) (0/2/6682517) (0/3/6682518) (0/4/6682519)
+    2  Node id()=1336504, processor_id()=1, Point=(x,y,z)=(0.00481683, 0.0020004,        0)
+    DoFs=(0/0/6682520) (0/1/6682521) (0/2/6682522) (0/3/6682523) (0/4/6682524)
+    3  Node id()=1321505, processor_id()=1, Point=(x,y,z)=(0.00481683, 0.0020004,        0)
+    DoFs=(0/0/6640435) (0/1/6640436) (0/2/6640437) (0/3/6640438) (0/4/6640439)
+   n_sides()=4
+    neighbor(0)=1321396
+    neighbor(1)=nullptr
+    neighbor(2)=1321398
+    neighbor(3)=1306399
+   hmin()=1.35092e-15, hmax()=2.0002e-07
+   volume()=2.70297e-22
+   active()=1, ancestor()=0, subactive()=0, has_children()=0
+   parent()=nullptr
+   level()=0, p_level()=0
+   refinement_flag()=DO_NOTHING
+   p_refinement_flag()=DO_NOTHING
+   DoFs=(1/0/2642794) (1/1/2642795)
+Exiting...
+[1] /home/alejandro/projects/moose/scripts/../libmesh/src/fe/fe_map.C, line 1905, compiled Jun  2 2019 at 20:20:16
+
+ERROR: Newton scheme FAILED to converge in 21 iterations in element 1314848 for physical point = (x,y,z)=(0.00350664, 0.0020004,        0)
+  Elem Information
+   id()=1314848, unique_id()=2689980, processor_id()=0
+   type()=QUAD4
+   dim()=2
+   n_nodes()=4
+    0  Node id()=1314955, processor_id()=0, Point=(x,y,z)=(0.0035066, 0.0020004,        0)
+    DoFs=(0/0/3292365) (0/1/3292366) (0/2/3292367) (0/3/3292368) (0/4/3292369)
+    1  Node id()=1329954, processor_id()=0, Point=(x,y,z)=(0.0035066, 0.0020004,        0)
+    DoFs=(0/0/3325275) (0/1/3325276) (0/2/3325277) (0/3/3325278) (0/4/3325279)
+    2  Node id()=1329955, processor_id()=0, Point=(x,y,z)=(0.0035068, 0.0020004,        0)
+    DoFs=(0/0/3325280) (0/1/3325281) (0/2/3325282) (0/3/3325283) (0/4/3325284)
+    3  Node id()=1314956, processor_id()=0, Point=(x,y,z)=(0.0035068, 0.0020004,        0)
+    DoFs=(0/0/3292370) (0/1/3292371) (0/2/3292372) (0/3/3292373) (0/4/3292374)
+   n_sides()=4
+    neighbor(0)=1314847
+    neighbor(1)=nullptr
+    neighbor(2)=1314849
+    neighbor(3)=1299850
+   hmin()=1.35092e-15, hmax()=2.0004e-07
+   volume()=2.70237e-22
+   active()=1, ancestor()=0, subactive()=0, has_children()=0
+   parent()=nullptr
+   level()=0, p_level()=0
+   refinement_flag()=DO_NOTHING
+   p_refinement_flag()=DO_NOTHING
+   DoFs=(1/0/1316718) (1/1/1316719)
+Exiting...
+[0] /home/alejandro/projects/moose/scripts/../libmesh/src/fe/fe_map.C, line 1905, compiled Jun  2 2019 at 20:20:16
+We caught a libMesh error
+Nonlinear solve did not converge due to DIVERGED_FUNCTION_DOMAIN iterations 0
+ Solve Did NOT Converge!
+Time Step 1, time = 0.0015625, dt = 0.0015625
+
+
+
+
+
+
+
+
+ERROR: Newton scheme FAILED to converge in 21 iterations in element 1314848 for physical point = (x,y,z)=(0.00350664, 0.0020004,        0)
+  Elem Information
+   id()=1314848, unique_id()=2689980, processor_id()=0
+   type()=QUAD4
+   dim()=2
+   n_nodes()=4
+    0  Node id()=1314955, processor_id()=0, Point=(x,y,z)=(0.0035066, 0.0020004,        0)
+    DoFs=(0/0/3292365) (0/1/3292366) (0/2/3292367) (0/3/3292368) (0/4/3292369)
+    1  Node id()=1329954, processor_id()=0, Point=(x,y,z)=(0.0035066, 0.0020004,        0)
+    DoFs=(0/0/3325275) (0/1/3325276) (0/2/3325277) (0/3/3325278) (0/4/3325279)
+    2  Node id()=1329955, processor_id()=0, Point=(x,y,z)=(0.0035068, 0.0020004,        0)
+    DoFs=(0/0/3325280) (0/1/3325281) (0/2/3325282) (0/3/3325283) (0/4/3325284)
+    3  Node id()=1314956, processor_id()=0, Point=(x,y,z)=(0.0035068, 0.0020004,        0)
+    DoFs=(0/0/3292370) (0/1/3292371) (0/2/3292372) (0/3/3292373) (0/4/3292374)
+   n_sides()=4
+    neighbor(0)=1314847
+    neighbor(1)=nullptr
+    neighbor(2)=1314849
+    neighbor(3)=1299850
+   hmin()=1.35092e-15, hmax()=2.0004e-07
+   volume()=2.70237e-22
+   active()=1, ancestor()=0, subactive()=0, has_children()=0
+   parent()=nullptr
+   level()=0, p_level()=0
+   refinement_flag()=DO_NOTHING
+   p_refinement_flag()=DO_NOTHING
+   DoFs=(1/0/1316718) (1/1/1316719)
+Exiting...
+[0] /home/alejandro/projects/moose/scripts/../libmesh/src/fe/fe_map.C, line 1905, compiled Jun  2 2019 at 20:20:16
+ERROR: Newton scheme FAILED to converge in 21 iterations in element 1321397 for physical point = (x,y,z)=(0.00481679, 0.0020004,        0)
+  Elem Information
+   id()=1321397, unique_id()=2696529, processor_id()=1
+   type()=QUAD4
+   dim()=2
+   n_nodes()=4
+    0  Node id()=1321504, processor_id()=1, Point=(x,y,z)=(0.00481663, 0.0020004,        0)
+    DoFs=(0/0/6640430) (0/1/6640431) (0/2/6640432) (0/3/6640433) (0/4/6640434)
+    1  Node id()=1336503, processor_id()=1, Point=(x,y,z)=(0.00481663, 0.0020004,        0)
+    DoFs=(0/0/6682515) (0/1/6682516) (0/2/6682517) (0/3/6682518) (0/4/6682519)
+    2  Node id()=1336504, processor_id()=1, Point=(x,y,z)=(0.00481683, 0.0020004,        0)
+    DoFs=(0/0/6682520) (0/1/6682521) (0/2/6682522) (0/3/6682523) (0/4/6682524)
+    3  Node id()=1321505, processor_id()=1, Point=(x,y,z)=(0.00481683, 0.0020004,        0)
+    DoFs=(0/0/6640435) (0/1/6640436) (0/2/6640437) (0/3/6640438) (0/4/6640439)
+   n_sides()=4
+    neighbor(0)=1321396
+    neighbor(1)=nullptr
+    neighbor(2)=1321398
+    neighbor(3)=1306399
+   hmin()=1.35092e-15, hmax()=2.0002e-07
+   volume()=2.70297e-22
+   active()=1, ancestor()=0, subactive()=0, has_children()=0
+   parent()=nullptr
+   level()=0, p_level()=0
+   refinement_flag()=DO_NOTHING
+   p_refinement_flag()=DO_NOTHING
+   DoFs=(1/0/2642794) (1/1/2642795)
+Exiting...
+[1] /home/alejandro/projects/moose/scripts/../libmesh/src/fe/fe_map.C, line 1905, compiled Jun  2 2019 at 20:20:16
+We caught a libMesh error
+
+
+
+
+
+
+
+
+
+
+ERROR: Newton scheme FAILED to converge in 21 iterations in element 1314848 for physical point = (x,y,z)=(0.00350664, 0.0020004,        0)
+  Elem Information
+   id()=1314848, unique_id()=2689980, processor_id()=0
+   type()=QUAD4
+   dim()=2
+   n_nodes()=4
+    0  Node id()=1314955, processor_id()=0, Point=(x,y,z)=(0.0035066, 0.0020004,        0)
+    DoFs=(0/0/3292365) (0/1/3292366) (0/2/3292367) (0/3/3292368) (0/4/3292369)
+    1  Node id()=1329954, processor_id()=0, Point=(x,y,z)=(0.0035066, 0.0020004,        0)
+    DoFs=(0/0/3325275) (0/1/3325276) (0/2/3325277) (0/3/3325278) (0/4/3325279)
+    2  Node id()=1329955, processor_id()=0, Point=(x,y,z)=(0.0035068, 0.0020004,        0)
+    DoFs=(0/0/3325280) (0/1/3325281) (0/2/3325282) (0/3/3325283) (0/4/3325284)
+    3  Node id()=1314956, processor_id()=0, Point=(x,y,z)=(0.0035068, 0.0020004,        0)
+    DoFs=(0/0/3292370) (0/1/3292371) (0/2/3292372) (0/3/3292373) (0/4/3292374)
+   n_sides()=4
+    neighbor(0)=1314847
+    neighbor(1)=nullptr
+    neighbor(2)=1314849
+    neighbor(3)=1299850
+   hmin()=1.35092e-15, hmax()=2.0004e-07
+   volume()=2.70237e-22
+   active()=1, ancestor()=0, subactive()=0, has_children()=0
+   parent()=nullptr
+   level()=0, p_level()=0
+   refinement_flag()=DO_NOTHING
+   p_refinement_flag()=DO_NOTHING
+   DoFs=(1/0/1316718) (1/1/1316719)
+Exiting...
+[0] /home/alejandro/projects/moose/scripts/../libmesh/src/fe/fe_map.C, line 1905, compiled Jun  2 2019 at 20:20:16
+ERROR: Newton scheme FAILED to converge in 21 iterations in element 1321397 for physical point = (x,y,z)=(0.00481679, 0.0020004,        0)
+  Elem Information
+   id()=1321397, unique_id()=2696529, processor_id()=1
+   type()=QUAD4
+   dim()=2
+   n_nodes()=4
+    0  Node id()=1321504, processor_id()=1, Point=(x,y,z)=(0.00481663, 0.0020004,        0)
+    DoFs=(0/0/6640430) (0/1/6640431) (0/2/6640432) (0/3/6640433) (0/4/6640434)
+    1  Node id()=1336503, processor_id()=1, Point=(x,y,z)=(0.00481663, 0.0020004,        0)
+    DoFs=(0/0/6682515) (0/1/6682516) (0/2/6682517) (0/3/6682518) (0/4/6682519)
+    2  Node id()=1336504, processor_id()=1, Point=(x,y,z)=(0.00481683, 0.0020004,        0)
+    DoFs=(0/0/6682520) (0/1/6682521) (0/2/6682522) (0/3/6682523) (0/4/6682524)
+    3  Node id()=1321505, processor_id()=1, Point=(x,y,z)=(0.00481683, 0.0020004,        0)
+    DoFs=(0/0/6640435) (0/1/6640436) (0/2/6640437) (0/3/6640438) (0/4/6640439)
+   n_sides()=4
+    neighbor(0)=1321396
+    neighbor(1)=nullptr
+    neighbor(2)=1321398
+    neighbor(3)=1306399
+   hmin()=1.35092e-15, hmax()=2.0002e-07
+   volume()=2.70297e-22
+   active()=1, ancestor()=0, subactive()=0, has_children()=0
+   parent()=nullptr
+   level()=0, p_level()=0
+   refinement_flag()=DO_NOTHING
+   p_refinement_flag()=DO_NOTHING
+   DoFs=(1/0/2642794) (1/1/2642795)
+Exiting...
+[1] /home/alejandro/projects/moose/scripts/../libmesh/src/fe/fe_map.C, line 1905, compiled Jun  2 2019 at 20:20:16
+We caught a libMesh error
+Nonlinear solve did not converge due to DIVERGED_FUNCTION_DOMAIN iterations 0
+ Solve Did NOT Converge!
+Time Step 1, time = 0.00078125, dt = 0.00078125
+
+
+
+
+
+
+
+
+ERROR: Newton scheme FAILED to converge in 21 iterations in element 1314848 for physical point = (x,y,z)=(0.00350664, 0.0020004,        0)
+  Elem Information
+   id()=1314848, unique_id()=2689980, processor_id()=0
+   type()=QUAD4
+   dim()=2
+   n_nodes()=4
+    0  Node id()=1314955, processor_id()=0, Point=(x,y,z)=(0.0035066, 0.0020004,        0)
+    DoFs=(0/0/3292365) (0/1/3292366) (0/2/3292367) (0/3/3292368) (0/4/3292369)
+    1  Node id()=1329954, processor_id()=0, Point=(x,y,z)=(0.0035066, 0.0020004,        0)
+    DoFs=(0/0/3325275) (0/1/3325276) (0/2/3325277) (0/3/3325278) (0/4/3325279)
+    2  Node id()=1329955, processor_id()=0, Point=(x,y,z)=(0.0035068, 0.0020004,        0)
+    DoFs=(0/0/3325280) (0/1/3325281) (0/2/3325282) (0/3/3325283) (0/4/3325284)
+    3  Node id()=1314956, processor_id()=0, Point=(x,y,z)=(0.0035068, 0.0020004,        0)
+    DoFs=(0/0/3292370) (0/1/3292371) (0/2/3292372) (0/3/3292373) (0/4/3292374)
+   n_sides()=4
+    neighbor(0)=1314847
+    neighbor(1)=nullptr
+    neighbor(2)=1314849
+    neighbor(3)=1299850
+   hmin()=1.35092e-15, hmax()=2.0004e-07
+   volume()=2.70237e-22
+   active()=1, ancestor()=0, subactive()=0, has_children()=0
+   parent()=nullptr
+   level()=0, p_level()=0
+   refinement_flag()=DO_NOTHING
+   p_refinement_flag()=DO_NOTHING
+   DoFs=(1/0/1316718) (1/1/1316719)
+Exiting...
+[0] /home/alejandro/projects/moose/scripts/../libmesh/src/fe/fe_map.C, line 1905, compiled Jun  2 2019 at 20:20:16
+ERROR: Newton scheme FAILED to converge in 21 iterations in element 1321397 for physical point = (x,y,z)=(0.00481679, 0.0020004,        0)
+  Elem Information
+   id()=1321397, unique_id()=2696529, processor_id()=1
+   type()=QUAD4
+   dim()=2
+   n_nodes()=4
+    0  Node id()=1321504, processor_id()=1, Point=(x,y,z)=(0.00481663, 0.0020004,        0)
+    DoFs=(0/0/6640430) (0/1/6640431) (0/2/6640432) (0/3/6640433) (0/4/6640434)
+    1  Node id()=1336503, processor_id()=1, Point=(x,y,z)=(0.00481663, 0.0020004,        0)
+    DoFs=(0/0/6682515) (0/1/6682516) (0/2/6682517) (0/3/6682518) (0/4/6682519)
+    2  Node id()=1336504, processor_id()=1, Point=(x,y,z)=(0.00481683, 0.0020004,        0)
+    DoFs=(0/0/6682520) (0/1/6682521) (0/2/6682522) (0/3/6682523) (0/4/6682524)
+    3  Node id()=1321505, processor_id()=1, Point=(x,y,z)=(0.00481683, 0.0020004,        0)
+    DoFs=(0/0/6640435) (0/1/6640436) (0/2/6640437) (0/3/6640438) (0/4/6640439)
+   n_sides()=4
+    neighbor(0)=1321396
+    neighbor(1)=nullptr
+    neighbor(2)=1321398
+    neighbor(3)=1306399
+   hmin()=1.35092e-15, hmax()=2.0002e-07
+   volume()=2.70297e-22
+   active()=1, ancestor()=0, subactive()=0, has_children()=0
+   parent()=nullptr
+   level()=0, p_level()=0
+   refinement_flag()=DO_NOTHING
+   p_refinement_flag()=DO_NOTHING
+   DoFs=(1/0/2642794) (1/1/2642795)
+Exiting...
+[1] /home/alejandro/projects/moose/scripts/../libmesh/src/fe/fe_map.C, line 1905, compiled Jun  2 2019 at 20:20:16
+We caught a libMesh error
+Finished: Exit code: 0

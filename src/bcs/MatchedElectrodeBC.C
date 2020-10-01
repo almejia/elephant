@@ -7,13 +7,13 @@
 //* Licensed under LGPL 2.1, please see LICENSE for details
 //* https://www.gnu.org/licenses/lgpl-2.1.html
 
-#include "CMatchedValueBC.h"
+#include "MatchedElectrodeBC.h"
 
-registerMooseObject("MooseApp", CMatchedValueBC);
+registerMooseObject("MooseApp", MatchedElectrodeBC);
 
 template <>
 InputParameters
-validParams<CMatchedValueBC>()
+validParams<MatchedElectrodeBC>()
 {
   InputParameters params = validParams<NodalBC>();
   params.addRequiredCoupledVar("v", "The variable whose value we are to match.");
@@ -29,29 +29,23 @@ validParams<CMatchedValueBC>()
   return params;
 }
 
-CMatchedValueBC::CMatchedValueBC(const InputParameters & parameters)
+MatchedElectrodeBC::MatchedElectrodeBC(const InputParameters & parameters)
   : NodalBC(parameters), _v(coupledValue("v")), _v_num(coupled("v")), _R(getParam<Real>("R")), _T(getParam<Real>("T")), _nv(getParam<Real>("nv")), _xv(getParam<Real>("xv")), _F(getParam<Real>("F")), _ysz_0(getParam<Real>("MuYSZ0"))
 
 {
 }
 
 Real
-CMatchedValueBC::computeQpResidual()
+MatchedElectrodeBC::computeQpResidual()
 {
-  return _v[_qp] - 2 * _F * _u[_qp] - _F * _ysz_0 - _nv * _R * _T * log(_xv/(1-_xv));
+  return (_v[_qp] - _F * _ysz_0 - _nv * _R * _T * log(_xv/(1-_xv)) ); // (2 *_F);
 }
 
 Real
-CMatchedValueBC::computeQpJacobian()
-{
-  return - 2 * _F ;
-}
-
-Real
-CMatchedValueBC::computeQpOffDiagJacobian(unsigned int jvar)
+MatchedElectrodeBC::computeQpOffDiagJacobian(unsigned int jvar)
 {
   if (jvar == _v_num)
-    return 1;
+    return 1; // (2 *_F);
   else
     return 0.;
 }

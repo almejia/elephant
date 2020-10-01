@@ -7,24 +7,24 @@
 //* Licensed under LGPL 2.1, please see LICENSE for details
 //* https://www.gnu.org/licenses/lgpl-2.1.html
 
-#ifndef CMATCHEDVALUEBC_H
-#define CMATCHEDVALUEBC_H
+#ifndef CMATCHEDVALUE2DBC_H
+#define CMATCHEDVALUE2DBC_H
 
 #include "NodalBC.h"
 
 // Forward Declarations
-class CMatchedValueBC;
+class CMatchedValue2DBC;
 
 template <>
-InputParameters validParams<CMatchedValueBC>();
+InputParameters validParams<CMatchedValue2DBC>();
 
 /**
  * Implements a simple coupled boundary condition where u=v on the boundary.
  */
-class CMatchedValueBC : public NodalBC
+class CMatchedValue2DBC : public NodalBC
 {
 public:
-  CMatchedValueBC(const InputParameters & parameters);
+  CMatchedValue2DBC(const InputParameters & parameters);
 
 protected:
   virtual Real computeQpResidual() override;
@@ -45,4 +45,4 @@ protected:
 
 };
 
-#endif // CMATCHEDVALUEBC_H
+#endif // CMATCHEDVALUE2DBC_H
