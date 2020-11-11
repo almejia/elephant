@@ -1,3 +1,4 @@
+*.msh
 .libs
 *.la
 *.lo
