@@ -5,7 +5,8 @@
 [Mesh]
 #  file = 'ecell.msh'
 #  file = 'FinalCell2.msh'
-  file = 'ThinFilm.msh'
+#  file = 'ThinFilm.msh'
+  file = 'mesh/FinalCell3.msh'
 #  type = GeneratedMesh
 #  dim = 2                # Mesh dimensions: 1D, 2D, 3D
 #  nx = 60                # 1D: Number of elements in X-direction 
@@ -35,11 +36,11 @@
   nv = 8.2975e4      # ANION SITE DENSITY 
   nvv = 2.4893e5     # ANION-ANION NEXT-NEAREST-NEIGHBOR DENSITY
  
-  fq = 76100         # ELECTRON SELF INTERACTION ENERGY
+  fqq = 76100         # ELECTRON SELF INTERACTION ENERGY
   fqv = -16600       # ELECTRON-VACANCY INTERACTION ENERGY
   fqy = 5000         # ELECTRON-DOPANT INTERACTION ENERGY
   fyv = -40000       # VACANCY-DOPANT INTERACTION ENERGY
-  fv = 57400         # VACANCY SELF INTERACTION ENERGY
+  fvv = 57400         # VACANCY SELF INTERACTION ENERGY
 
   gq = 1.18e-9       # ELECTRON GRADIENT ENERGY COEFFICIENT
   gv = 1.07e-9       # VACANCY GRADIENT ENERGY COEFFICIENT
